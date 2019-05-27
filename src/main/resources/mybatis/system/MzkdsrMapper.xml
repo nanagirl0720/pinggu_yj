@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.mzkdsr.mapper.MzkdsrMapper">
+    
+    <resultMap type="Mzkdsr" id="MzkdsrResult">
+        <result property="id"    column="id"    />
+        <result property="kdks"    column="kdks"    />
+        <result property="zygsks"    column="zygsks"    />
+        <result property="rc"    column="rc"    />
+        <result property="guf"    column="guf"    />
+        <result property="xyf"    column="xyf"    />
+        <result property="zcyf"    column="zcyf"    />
+        <result property="zcaoy"    column="zcaoy"    />
+        <result property="jcf"    column="jcf"    />
+        <result property="zlf"    column="zlf"    />
+        <result property="fs"    column="fs"    />
+        <result property="ssf"    column="ssf"    />
+        <result property="hyf"    column="hyf"    />
+        <result property="qtf"    column="qtf"    />
+        <result property="hc"    column="hc"    />
+        <result property="csf"    column="csf"    />
+        <result property="xdt"    column="xdt"    />
+        <result property="gyy"    column="gyy"    />
+        <result property="zhenliaof"    column="zhenliaof"    />
+        <result property="clf"    column="clf"    />
+        <result property="ct"    column="ct"    />
+        <result property="jhf"    column="jhf"    />
+        <result property="mzf"    column="mzf"    />
+        <result property="jyf"    column="jyf"    />
+        <result property="bl"    column="bl"    />
+        <result property="liliaof"    column="liliaof"    />
+        <result property="jhc"    column="jhc"    />
+        <result property="zj"    column="zj"    />
+        <result property="yq"    column="yq"    />
+        <result property="sx"    column="sx"    />
+        <result property="qjf"    column="qjf"    />
+        <result property="xtf"    column="xtf"    />
+        <result property="nkj"    column="nkj"    />
+        <result property="rgqg"    column="rgqg"    />
+        <result property="ydpb"    column="ydpb"    />
+        <result property="xqfx"    column="xqfx"    />
+        <result property="tcd"    column="tcd"    />
+        <result property="ykabchao"    column="ykabchao"    />
+        <result property="nfmhy"    column="nfmhy"    />
+        <result property="dtxdy"    column="dtxdy"    />
+        <result property="dtxy"    column="dtxy"    />
+        <result property="suishif"    column="suishif"    />
+        <result property="bkhy"    column="bkhy"    />
+        <result property="hxyj"    column="hxyj"    />
+        <result property="bltct"    column="bltct"    />
+        <result property="fscl"    column="fscl"    />
+        <result property="pkjc"    column="pkjc"    />
+        <result property="gmdjc"    column="gmdjc"    />
+        <result property="ydzx"    column="ydzx"    />
+        <result property="bkjc"    column="bkjc"    />
+        <result property="hpvjc"    column="hpvjc"    />
+        <result property="mccl"    column="mccl"    />
+        <result property="ysfwf"    column="ysfwf"    />
+        <result property="tn"    column="tn"    />
+        <result property="kqfs"    column="kqfs"    />
+        <result property="tjdata"    column="tjdata"    />
+    </resultMap>
+	
+	<sql id="selectMzkdsrVo">
+        select id, kdks, zygsks, rc, guf, xyf, zcyf, zcaoy, jcf, zlf, fs, ssf, hyf, qtf, hc, csf, xdt, gyy, zhenliaof, clf, ct, jhf, mzf, jyf, bl, liliaof, jhc, zj, yq, sx, qjf, xtf, nkj, rgqg, ydpb, xqfx, tcd, ykabchao, nfmhy, dtxdy, dtxy, suishif, bkhy, hxyj, bltct, fscl, pkjc, gmdjc, ydzx, bkjc, hpvjc, mccl, ysfwf, tn, kqfs,tjdata from sys_mzkdsr
+    </sql>
+	
+    <select id="selectMzkdsrList" parameterType="Mzkdsr" resultMap="MzkdsrResult">
+        <include refid="selectMzkdsrVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="kdks != null  and kdks != '' "> and kdks = #{kdks}</if>
+             <if test="zygsks != null  and zygsks != '' "> and zygsks = #{zygsks}</if>
+             <if test="tjdata != null and tjdata != '' "> and tjdata = #{tjdata}</if>
+         </where>
+    </select>
+    
+    <select id="selectMzkdsrById" parameterType="Integer" resultMap="MzkdsrResult">
+        <include refid="selectMzkdsrVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMzkdsr" parameterType="Mzkdsr">
+        insert into sys_mzkdsr
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="kdks != null  and kdks != ''  ">kdks,</if>
+			<if test="zygsks != null  and zygsks != ''  ">zygsks,</if>
+			<if test="rc != null  ">rc,</if>
+			<if test="guf != null  ">guf,</if>
+			<if test="xyf != null  ">xyf,</if>
+			<if test="zcyf != null  ">zcyf,</if>
+			<if test="zcaoy != null  ">zcaoy,</if>
+			<if test="jcf != null  ">jcf,</if>
+			<if test="zlf != null  ">zlf,</if>
+			<if test="fs != null  ">fs,</if>
+			<if test="ssf != null  ">ssf,</if>
+			<if test="hyf != null  ">hyf,</if>
+			<if test="qtf != null  ">qtf,</if>
+			<if test="hc != null  ">hc,</if>
+			<if test="csf != null  ">csf,</if>
+			<if test="xdt != null  ">xdt,</if>
+			<if test="gyy != null  ">gyy,</if>
+			<if test="zhenliaof != null  ">zhenliaof,</if>
+			<if test="clf != null  ">clf,</if>
+			<if test="ct != null  ">ct,</if>
+			<if test="jhf != null  ">jhf,</if>
+			<if test="mzf != null  ">mzf,</if>
+			<if test="jyf != null  ">jyf,</if>
+			<if test="bl != null  ">bl,</if>
+			<if test="liliaof != null  ">liliaof,</if>
+			<if test="jhc != null  ">jhc,</if>
+			<if test="zj != null  ">zj,</if>
+			<if test="yq != null  ">yq,</if>
+			<if test="sx != null  ">sx,</if>
+			<if test="qjf != null  ">qjf,</if>
+			<if test="xtf != null  ">xtf,</if>
+			<if test="nkj != null  ">nkj,</if>
+			<if test="rgqg != null  ">rgqg,</if>
+			<if test="ydpb != null  ">ydpb,</if>
+			<if test="xqfx != null  ">xqfx,</if>
+			<if test="tcd != null  ">tcd,</if>
+			<if test="ykabchao != null  ">ykabchao,</if>
+			<if test="nfmhy != null  ">nfmhy,</if>
+			<if test="dtxdy != null  ">dtxdy,</if>
+			<if test="dtxy != null  ">dtxy,</if>
+			<if test="suishif != null  ">suishif,</if>
+			<if test="bkhy != null  ">bkhy,</if>
+			<if test="hxyj != null  ">hxyj,</if>
+			<if test="bltct != null  ">bltct,</if>
+			<if test="fscl != null  ">fscl,</if>
+			<if test="pkjc != null  ">pkjc,</if>
+			<if test="gmdjc != null  ">gmdjc,</if>
+			<if test="ydzx != null  ">ydzx,</if>
+			<if test="bkjc != null  ">bkjc,</if>
+			<if test="hpvjc != null  ">hpvjc,</if>
+			<if test="mccl != null  ">mccl,</if>
+			<if test="ysfwf != null  ">ysfwf,</if>
+			<if test="tn != null  ">tn,</if>
+			<if test="kqfs != null  ">kqfs,</if>
+			<if test="tjdata != null  ">tjdata,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="kdks != null  and kdks != ''  ">#{kdks},</if>
+			<if test="zygsks != null  and zygsks != ''  ">#{zygsks},</if>
+			<if test="rc != null  ">#{rc},</if>
+			<if test="guf != null  ">#{guf},</if>
+			<if test="xyf != null  ">#{xyf},</if>
+			<if test="zcyf != null  ">#{zcyf},</if>
+			<if test="zcaoy != null  ">#{zcaoy},</if>
+			<if test="jcf != null  ">#{jcf},</if>
+			<if test="zlf != null  ">#{zlf},</if>
+			<if test="fs != null  ">#{fs},</if>
+			<if test="ssf != null  ">#{ssf},</if>
+			<if test="hyf != null  ">#{hyf},</if>
+			<if test="qtf != null  ">#{qtf},</if>
+			<if test="hc != null  ">#{hc},</if>
+			<if test="csf != null  ">#{csf},</if>
+			<if test="xdt != null  ">#{xdt},</if>
+			<if test="gyy != null  ">#{gyy},</if>
+			<if test="zhenliaof != null  ">#{zhenliaof},</if>
+			<if test="clf != null  ">#{clf},</if>
+			<if test="ct != null  ">#{ct},</if>
+			<if test="jhf != null  ">#{jhf},</if>
+			<if test="mzf != null  ">#{mzf},</if>
+			<if test="jyf != null  ">#{jyf},</if>
+			<if test="bl != null  ">#{bl},</if>
+			<if test="liliaof != null  ">#{liliaof},</if>
+			<if test="jhc != null  ">#{jhc},</if>
+			<if test="zj != null  ">#{zj},</if>
+			<if test="yq != null  ">#{yq},</if>
+			<if test="sx != null  ">#{sx},</if>
+			<if test="qjf != null  ">#{qjf},</if>
+			<if test="xtf != null  ">#{xtf},</if>
+			<if test="nkj != null  ">#{nkj},</if>
+			<if test="rgqg != null  ">#{rgqg},</if>
+			<if test="ydpb != null  ">#{ydpb},</if>
+			<if test="xqfx != null  ">#{xqfx},</if>
+			<if test="tcd != null  ">#{tcd},</if>
+			<if test="ykabchao != null  ">#{ykabchao},</if>
+			<if test="nfmhy != null  ">#{nfmhy},</if>
+			<if test="dtxdy != null  ">#{dtxdy},</if>
+			<if test="dtxy != null  ">#{dtxy},</if>
+			<if test="suishif != null  ">#{suishif},</if>
+			<if test="bkhy != null  ">#{bkhy},</if>
+			<if test="hxyj != null  ">#{hxyj},</if>
+			<if test="bltct != null  ">#{bltct},</if>
+			<if test="fscl != null  ">#{fscl},</if>
+			<if test="pkjc != null  ">#{pkjc},</if>
+			<if test="gmdjc != null  ">#{gmdjc},</if>
+			<if test="ydzx != null  ">#{ydzx},</if>
+			<if test="bkjc != null  ">#{bkjc},</if>
+			<if test="hpvjc != null  ">#{hpvjc},</if>
+			<if test="mccl != null  ">#{mccl},</if>
+			<if test="ysfwf != null  ">#{ysfwf},</if>
+			<if test="tn != null  ">#{tn},</if>
+			<if test="kqfs != null  ">#{kqfs},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateMzkdsr" parameterType="Mzkdsr">
+        update sys_mzkdsr
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="kdks != null  and kdks != ''  ">kdks = #{kdks},</if>
+            <if test="zygsks != null  and zygsks != ''  ">zygsks = #{zygsks},</if>
+            <if test="rc != null  ">rc = #{rc},</if>
+            <if test="guf != null  ">guf = #{guf},</if>
+            <if test="xyf != null  ">xyf = #{xyf},</if>
+            <if test="zcyf != null  ">zcyf = #{zcyf},</if>
+            <if test="zcaoy != null  ">zcaoy = #{zcaoy},</if>
+            <if test="jcf != null  ">jcf = #{jcf},</if>
+            <if test="zlf != null  ">zlf = #{zlf},</if>
+            <if test="fs != null  ">fs = #{fs},</if>
+            <if test="ssf != null  ">ssf = #{ssf},</if>
+            <if test="hyf != null  ">hyf = #{hyf},</if>
+            <if test="qtf != null  ">qtf = #{qtf},</if>
+            <if test="hc != null  ">hc = #{hc},</if>
+            <if test="csf != null  ">csf = #{csf},</if>
+            <if test="xdt != null  ">xdt = #{xdt},</if>
+            <if test="gyy != null  ">gyy = #{gyy},</if>
+            <if test="zhenliaof != null  ">zhenliaof = #{zhenliaof},</if>
+            <if test="clf != null  ">clf = #{clf},</if>
+            <if test="ct != null  ">ct = #{ct},</if>
+            <if test="jhf != null  ">jhf = #{jhf},</if>
+            <if test="mzf != null  ">mzf = #{mzf},</if>
+            <if test="jyf != null  ">jyf = #{jyf},</if>
+            <if test="bl != null  ">bl = #{bl},</if>
+            <if test="liliaof != null  ">liliaof = #{liliaof},</if>
+            <if test="jhc != null  ">jhc = #{jhc},</if>
+            <if test="zj != null  ">zj = #{zj},</if>
+            <if test="yq != null  ">yq = #{yq},</if>
+            <if test="sx != null  ">sx = #{sx},</if>
+            <if test="qjf != null  ">qjf = #{qjf},</if>
+            <if test="xtf != null  ">xtf = #{xtf},</if>
+            <if test="nkj != null  ">nkj = #{nkj},</if>
+            <if test="rgqg != null  ">rgqg = #{rgqg},</if>
+            <if test="ydpb != null  ">ydpb = #{ydpb},</if>
+            <if test="xqfx != null  ">xqfx = #{xqfx},</if>
+            <if test="tcd != null  ">tcd = #{tcd},</if>
+            <if test="ykabchao != null  ">ykabchao = #{ykabchao},</if>
+            <if test="nfmhy != null  ">nfmhy = #{nfmhy},</if>
+            <if test="dtxdy != null  ">dtxdy = #{dtxdy},</if>
+            <if test="dtxy != null  ">dtxy = #{dtxy},</if>
+            <if test="suishif != null  ">suishif = #{suishif},</if>
+            <if test="bkhy != null  ">bkhy = #{bkhy},</if>
+            <if test="hxyj != null  ">hxyj = #{hxyj},</if>
+            <if test="bltct != null  ">bltct = #{bltct},</if>
+            <if test="fscl != null  ">fscl = #{fscl},</if>
+            <if test="pkjc != null  ">pkjc = #{pkjc},</if>
+            <if test="gmdjc != null  ">gmdjc = #{gmdjc},</if>
+            <if test="ydzx != null  ">ydzx = #{ydzx},</if>
+            <if test="bkjc != null  ">bkjc = #{bkjc},</if>
+            <if test="hpvjc != null  ">hpvjc = #{hpvjc},</if>
+            <if test="mccl != null  ">mccl = #{mccl},</if>
+            <if test="ysfwf != null  ">ysfwf = #{ysfwf},</if>
+            <if test="tn != null  ">tn = #{tn},</if>
+            <if test="kqfs != null  ">kqfs = #{kqfs},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteMzkdsrById" parameterType="Integer">
+        delete from sys_mzkdsr where id = #{id}
+    </delete>
+    
+    <delete id="deleteMzkdsrByIds" parameterType="String">
+        delete from sys_mzkdsr where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

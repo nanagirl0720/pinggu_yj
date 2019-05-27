@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+						    <li>
+								数据来源：<select name="flag" th:with="type=${@dict.getType('sys_data_type')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+							</li>
+							
+							<li>
+								费用类别：<select class="selectpicker show-tick" multiple  data-max-options="1" data-live-search="true" data-live-search-placeholder="搜索"  name="feeid" title="--请选择--"  data-style="btn-info" data-actions-box="true"> 
+					    					<option   th:each="fee:${session.feelist}" th:value="${fee.id}" th:text="${fee.feename}"></option>
+									  </select>
+							</li>
+							
+							<li>
+								科室：<select class="selectpicker show-tick" multiple  data-max-options="1" data-live-search="true" data-live-search-placeholder="搜索"  name="deptid" title="--请选择--"  data-style="btn-info" data-actions-box="true"> 
+					    					<option   th:each="dept:${session.deptlist}" th:value="${dept.deptId}" th:text="${dept.deptName}"></option>
+									  </select>
+							</li>
+
+							<li class="select-time">
+								<label>创建时间：</label>
+								<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+								<span>-</span>
+								<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+							</li>	
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:feetibi:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:feetibi:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:feetibi:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:feetibi:export">
+						<i class="fa fa-download"></i> 导出
+				</a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:feetibi:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:feetibi:remove')}]];
+        var prefix = ctx + "system/feetibi";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+                modalName: "收入提比",
+				search: false,
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'id', 
+					title : '费用提纯比率表id',
+					visible: false
+				},
+				{
+					field : 'dept.deptName', 
+					title : '科室',
+					sortable: true
+				},
+				{
+					field : 'feetype.feename', 
+					title : '费用类别',
+					sortable: true
+				},
+				{
+					field : 'tibi', 
+					title : '提纯比例',
+					sortable: true
+				},
+				{
+					field : 'flag', 
+					title : '数据来源',
+					sortable: true,
+					formatter: function(value, row, index){
+	                	if(value== 1){
+	                		value = "门诊";
+	                	}
+	                	if(value== 2){
+	                		value = "住院";
+	                	}
+	                	if(value== 3){
+	                		value = "门诊住院";
+	                	}
+	                	return value;
+					}
+				},
+				{
+					field : 'createtime', 
+					title : '创建时间',
+					sortable: true
+				},
+				{
+					field : 'updatetime', 
+					title : '修改时间',
+					sortable: true
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

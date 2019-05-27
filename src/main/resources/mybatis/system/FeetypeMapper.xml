@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.feetype.mapper.FeetypeMapper">
+    
+    <resultMap type="Feetype" id="FeetypeResult">
+        <result property="id"    column="id"    />
+        <result property="feecode"    column="feecode"    />
+        <result property="feename"    column="feename"    />
+        <result property="datatype"    column="datatype"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="updatetime"    column="updatetime"    />
+        <association property="dictdata"    column="dictdata" javaType="DictData" resultMap="dictdataResult" />
+    </resultMap>
+    
+    <resultMap type="DictData" id="dictdataResult">
+        <id property="dict_code" column="dict_code" />
+        <result property="dictLabel" column="dictLabel" />
+        <result property="dictValue" column="dictValue" />
+    </resultMap>
+	
+	<sql id="selectFeetypeVo">
+        select 
+            f.id, f.feecode, f.feename, f.createtime, f.datatype,d.dict_label, f.updatetime 
+        from 
+            sys_feetype f
+            left join sys_dict_data d on f.datatype = d.dict_value 
+        where d.dict_type = 'sys_data_type'
+    </sql>
+	
+    <select id="selectFeetypeList" parameterType="Feetype" resultMap="FeetypeResult">
+        <include refid="selectFeetypeVo"/>
+            <if test="id != null "> and id = #{id}</if>
+            <if test="feecode != null  and feecode != '' "> and feecode = #{feecode}</if>
+             
+            <if test="feename != null  and feename != '' "> and feename = #{feename}</if>
+            <if test="datatype != null "> and datatype = #{datatype}</if>
+            <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+				and date_format(createtime,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+			</if>
+			
+			<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+				and date_format(createtime,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+			</if>
+    </select>
+    
+    <select id="selectFeetypeById" parameterType="Integer" resultMap="FeetypeResult">
+        <include refid="selectFeetypeVo"/>
+        and id = #{id}
+    </select>
+        
+    <insert id="insertFeetype" parameterType="Feetype">
+        insert into sys_feetype
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="feecode != null  and feecode != ''  ">feecode,</if>
+			<if test="feename != null  and feename != ''  ">feename,</if>
+			<if test="datatype != null  and datatype != ''  ">datatype,</if>
+            createtime
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="feecode != null  and feecode != ''  ">#{feecode},</if>
+			<if test="feename != null  and feename != ''  ">#{feename},</if>
+			<if test="datatype != null  and datatype != ''  ">#{datatype},</if>
+            sysdate()
+         </trim>
+    </insert>
+	 
+    <update id="updateFeetype" parameterType="Feetype">
+        update sys_feetype
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="feecode != null  and feecode != ''  ">feecode = #{feecode},</if>
+            <if test="feename != null  and feename != ''  ">feename = #{feename},</if>
+            <if test="datatype != null  and datatype != ''  ">datatype =#{datatype},</if>
+            updatetime = sysdate()
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteFeetypeById" parameterType="Integer">
+        delete from sys_feetype where id = #{id}
+    </delete>
+	
+    <delete id="deleteFeetypeByIds" parameterType="String">
+        delete from sys_feetype where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <select id="checkFeetypeNameUnique" parameterType="String" resultMap="FeetypeResult">
+		<include refid="selectFeetypeVo"/>
+		 and feename=#{feename}
+	</select>
+	
+	<select id="checkFeetypeCodeUnique" parameterType="String" resultMap="FeetypeResult">
+		<include refid="selectFeetypeVo"/>
+		 and feecode=#{feecode}
+	</select>
+    
+</mapper>

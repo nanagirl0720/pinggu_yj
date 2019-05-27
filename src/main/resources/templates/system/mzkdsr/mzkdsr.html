@@ -1,0 +1,392 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+							<li>
+								开单科室：<input type="text" name="kdks" id="kdks"/>
+							</li>
+
+							<li>
+								住院归属科室：<input type="text" name="zygsks"/>
+							</li>
+							
+							<li class="select-time">
+								<label>核算日期：</label>
+								<input type='text' class="form-control form_datetime" name="tjdata" id="tjdata" placeholder="核算日期" />
+							</li>
+
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:mzkdsr:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:mzkdsr:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:mzkdsr:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:mzkdsr:export">
+						<i class="fa fa-download"></i> 导出
+				</a>
+				<a class="btn btn-outline btn-success btn-rounded" onclick="$.operate.importexcel()" shiro:hasPermission="system:mzkdsr:export">
+						<i class="fa fa-upload"></i> 导入EXCEL
+				</a>
+				<a class="btn btn-danger" onclick="javascript:mzaccounting()" shiro:hasPermission="system:mzkdsr:mzaccounting">
+						<i class="glyphicon glyphicon-hand-right"></i> 核算
+				</a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:mzkdsr:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:mzkdsr:remove')}]];
+        var prefix = ctx + "system/mzkdsr";
+        
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+                modalName: "门诊开单收入数据",
+				search: false,
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'id', 
+					title : '门诊收入表id',
+					visible: false
+				},
+				{
+					field : 'kdks', 
+					title : '开单科室',
+					sortable: true
+				},
+				{
+					field : 'zygsks', 
+					title : '住院归属科室',
+					sortable: true
+				},
+				{
+					field : 'rc', 
+					title : '人次',
+					sortable: true
+				},
+				{
+					field : 'guf', 
+					title : '挂号费',
+					sortable: true
+				},
+				{
+					field : 'xyf', 
+					title : '西药费',
+					sortable: true
+				},
+				{
+					field : 'zcyf', 
+					title : '中成药',
+					sortable: true
+				},
+				{
+					field : 'zcaoy', 
+					title : '中草药',
+					sortable: true
+				},
+				{
+					field : 'jcf', 
+					title : '检查费',
+					sortable: true
+				},
+				{
+					field : 'zlf', 
+					title : '治疗费',
+					sortable: true
+				},
+				{
+					field : 'fs', 
+					title : '放射',
+					sortable: true
+				},
+				{
+					field : 'ssf', 
+					title : '手术费',
+					sortable: true
+				},
+				{
+					field : 'hyf', 
+					title : '化验费',
+					sortable: true
+				},
+				{
+					field : 'qtf', 
+					title : '其它费',
+					sortable: true
+				},
+				{
+					field : 'hc', 
+					title : '核磁',
+					sortable: true
+				},
+				{
+					field : 'csf', 
+					title : '超声费',
+					sortable: true
+				},
+				{
+					field : 'xdt', 
+					title : '心电图',
+					sortable: true
+				},
+				{
+					field : 'gyy', 
+					title : '高压氧',
+					sortable: true
+				},
+				{
+					field : 'zhenliaof', 
+					title : '诊疗费',
+					sortable: true
+				},
+				{
+					field : 'clf', 
+					title : '材料费',
+					sortable: true
+				},
+				{
+					field : 'ct', 
+					title : 'CT',
+					sortable: true
+				},
+				{
+					field : 'jhf', 
+					title : '监护费',
+					sortable: true
+				},
+				{
+					field : 'mzf', 
+					title : '麻醉费',
+					sortable: true
+				},
+				{
+					field : 'jyf', 
+					title : '煎药费',
+					sortable: true
+				},
+				{
+					field : 'bl', 
+					title : '病理',
+					sortable: true
+				},
+				{
+					field : 'liliaof', 
+					title : '理疗费',
+					sortable: true
+				},
+				{
+					field : 'jhc', 
+					title : '救护车',
+					sortable: true
+				},
+				{
+					field : 'zj', 
+					title : '针灸',
+					sortable: true
+				},
+				{
+					field : 'yq', 
+					title : '氧气',
+					sortable: true
+				},
+				{
+					field : 'sx', 
+					title : '输血',
+					sortable: true
+				},
+				{
+					field : 'qjf', 
+					title : '抢救费',
+					sortable: true
+				},
+				{
+					field : 'xtf', 
+					title : '血透费',
+					sortable: true
+				},
+				{
+					field : 'nkj', 
+					title : '内窥镜',
+					sortable: true
+				},
+				{
+					field : 'rgqg', 
+					title : '人工器官',
+					sortable: true
+				},
+				{
+					field : 'ydpb', 
+					title : '运动平板',
+					sortable: true
+				},
+				{
+					field : 'xqfx', 
+					title : '血气分析',
+					sortable: true
+				},
+				{
+					field : 'tcd', 
+					title : 'TCD',
+					sortable: true
+				},
+				{
+					field : 'ykabchao', 
+					title : '眼科AB超',
+					sortable: true
+				},
+				{
+					field : 'nfmhy', 
+					title : '内分泌化验',
+					sortable: true
+				},
+				{
+					field : 'dtxdy', 
+					title : '动态心电图',
+					sortable: true
+				},
+				{
+					field : 'dtxy', 
+					title : '动态血压',
+					sortable: true
+				},
+				{
+					field : 'suishif', 
+					title : '碎石费',
+					sortable: true
+				},
+				{
+					field : 'bkhy', 
+					title : '本科化验',
+					sortable: true
+				},
+				{
+					field : 'hxyj', 
+					title : '呼吸医技',
+					sortable: true
+				},
+				{
+					field : 'bltct', 
+					title : '病理(TCT)',
+					sortable: true
+				},
+				{
+					field : 'fscl', 
+					title : '放射材料',
+					sortable: true
+				},
+				{
+					field : 'pkjc', 
+					title : '皮科检查',
+					sortable: true
+				},
+				{
+					field : 'gmdjc', 
+					title : '骨密度检查',
+					sortable: true
+				},
+				{
+					field : 'ydzx', 
+					title : '眼底照相',
+					sortable: true
+				},
+				{
+					field : 'bkjc', 
+					title : '本科检查',
+					sortable: true
+				},
+				{
+					field : 'hpvjc', 
+					title : 'HPV检查',
+					sortable: true
+				},
+				{
+					field : 'mccl', 
+					title : '脉冲磁疗',
+					sortable: true
+				},
+				{
+					field : 'ysfwf', 
+					title : '医事服务费',
+					sortable: true
+				},
+				{
+					field : 'tn', 
+					title : '推拿',
+					sortable: true
+				},
+				{
+					field : 'kqfs', 
+					title : '口腔放射',
+					sortable: true
+				},
+				{
+					field : 'tjdata', 
+					title : '核算日期',
+					sortable: true
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+        
+        $('#tjdata').datetimepicker({
+       	 format: 'yyyy-mm',
+            autoclose: true,
+            todayBtn: true,
+            startView: 'year',
+            minView:'year',
+            maxView:'decade',
+            language:  'zh-CN',
+       });
+       
+       function mzaccounting(tjdata) {
+		    $.modal.confirm("确定要核算该月数据么？", function() {
+		    	var data = $("#tjdata")
+		    	alert(data);
+		        $.operate.post(prefix + "/mzaccounting",data);
+		    })
+		}
+    </script>
+</body>
+</html>

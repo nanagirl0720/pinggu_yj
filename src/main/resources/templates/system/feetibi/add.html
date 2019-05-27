@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-feetibi-add">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">科室：</label>
+				<div class="col-sm-8">
+					<select class="form-control  selectpicker show-tick" multiple  data-max-options="1" data-live-search="true" data-live-search-placeholder="搜索" title="--请选择--"  name="deptid" style="center" data-style="btn-info" data-actions-box="true">
+					    <option th:each="dept:${session.deptlist}" th:value="${dept.deptId}" th:text="${dept.deptName}"></option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">费用类别：</label>
+				<div class="col-sm-8">
+					<select class="form-control  selectpicker show-tick" multiple  data-max-options="1" data-live-search="true" data-live-search-placeholder="搜索" title="--请选择--"  name="feeid" style="center" data-style="btn-info" data-actions-box="true">
+					    <option th:each="fee:${session.feelist}" th:value="${fee.id}" th:text="${fee.feename}"></option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">提纯比例：</label>
+				<div class="col-sm-8">
+					<input id="tibi" name="tibi" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">数据来源：</label>
+				<div class="col-sm-8">
+					<select id="flag" name="flag" class="form-control m-b" th:with="type=${@dict.getType('sys_data_type')}">
+	                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+	                </select>
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/feetibi"
+		$("#form-feetibi-add").validate({
+			rules:{
+				tibi:{
+					required:true,
+					remote: {
+		                url: prefix + "/checkFeeByTibi",
+		                type: "post",
+		                dataType: "json",
+		                data: {
+		                	"tibi" : function() {
+		                        return $.common.trim($("#tibi").val());
+		                    }
+		                },
+		                dataFilter: function(data, type) {
+		                	return $.validate.unique(data);
+		                }
+		            }
+				},
+			},
+		    messages: {
+	            "tibi": {
+	                remote: "请填写数值类型的值"
+	            }
+	        }
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-feetibi-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+		<form id="form1" method="post" enctype="multipart/form-data">
+	        	<input type="hidden" value="${type!}" id="type" name="type" accept="xlsx">
+	        	<input type="file" class="form-control" name="file" id="file" >
+	            <div class="row">
+	                <div class="flexca">
+	                	<input type="reset" class="btn btn-warning" onClick="closePag()" value="取消">
+	                	<input type="submit" id="tj" class="btn btn-primary" value="提交" style="margin-left:65px;">
+	                </div>
+	            </div>
+        	</form>
+  </div>
+<script type="text/javascript">
+    var prefix = ctx + "system/spdeptXm"
+    
+    $(function(){
+		 type = $("#type").val();//全局配置文件的类型 
+		 $("#tj").click(function () {
+	            var formData = new FormData($('#form1')[0]);
+	            $.ajax({
+	                type: 'post',
+	                url: prefix + "/importexcel",
+	                data: formData,
+	                cache: false,
+	                processData: false,
+	                contentType: false,
+	            }).success(function (data) {
+	            	if(data.code == 200){
+	 		        	Feng.success("上传成功!");
+	 		        }else{
+	 		        	Feng.error("上传失败！"+data.message);
+	 		        }
+	 		    	closePag();
+	            }).error(function () {
+	                alert("上传失败");
+	            });
+	        }); 
+		  
+	});
+</script>
+</body>
+</html>

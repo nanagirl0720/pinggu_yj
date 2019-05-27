@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.spdeptXm.mapper.SpdeptXmMapper">
+    
+    <resultMap type="SpdeptXm" id="SpdeptXmResult">
+        <result property="id"    column="id"/>
+        <result property="xmcode"    column="xmcode"    />
+        <result property="xmname"    column="xmname"    />
+        <result property="sxks"    column="sxks"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <association property="dept" column="dept_id" javaType="Dept" resultMap="deptResult"/>
+    </resultMap>
+    
+    <resultMap id="deptResult" type="Dept">
+		<id property="deptId" column="dept_id"/>
+		<result property="deptName" column="dept_name"/>
+	</resultMap>
+	
+	<sql id="selectSpdeptXmVo">
+        select s.id,s.xmcode,s.xmname,s.sxks,d.dept_name,s.create_time from sys_spdept_xm s left join sys_dept  d 
+		on d.dept_id=s.sxks
+    </sql>
+	
+    <select id="selectSpdeptXmList" parameterType="SpdeptXm" resultMap="SpdeptXmResult">
+        <include refid="selectSpdeptXmVo"/>
+        <where>  
+             <if test="xmcode != null  and xmcode != '' "> and xmcode = #{xmcode}</if>
+             
+             <if test="xmname != null  and xmname != '' "> and xmname = #{xmname}</if>
+             
+             <if test="sxks != null and sxks != '' "> and sxks = #{sxks}</if>
+             
+             <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+				and date_format(s.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+			</if>
+			
+			<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+				and date_format(s.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+			</if>
+         </where>
+    </select>
+    
+    <select id="selectSpdeptXmById" parameterType="Integer" resultMap="SpdeptXmResult">
+        <include refid="selectSpdeptXmVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSpdeptXm" parameterType="SpdeptXm">
+        insert into sys_spdept_xm
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="xmcode != null  and xmcode != ''  ">xmcode,</if>
+			<if test="xmname != null  and xmname != ''  ">xmname,</if>
+			<if test="sxks != null  ">sxks,</if>
+			create_time
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="xmcode != null  and xmcode != ''  ">#{xmcode},</if>
+			<if test="xmname != null  and xmname != ''  ">#{xmname},</if>
+			<if test="sxks != null  ">#{sxks},</if>
+			sysdate()
+         </trim>
+    </insert>
+	 
+    <update id="updateSpdeptXm" parameterType="SpdeptXm">
+        update sys_spdept_xm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xmcode != null  and xmcode != ''  ">xmcode = #{xmcode},</if>
+            <if test="xmname != null  and xmname != ''  ">xmname = #{xmname},</if>
+            <if test="sxks != null  ">sxks = #{sxks},</if>
+            update_time = sysdate()
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteSpdeptXmById" parameterType="Integer">
+        delete from sys_spdept_xm where id = #{id}
+    </delete>
+	
+    <delete id="deleteSpdeptXmByIds" parameterType="String">
+        delete from sys_spdept_xm where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <select id="checkSpdeptXmNameUnique" parameterType="String" resultMap="SpdeptXmResult">
+		<include refid="selectSpdeptXmVo"/>
+		 where xmname=#{xmname}
+	</select>
+	
+	<select id="checkSpdeptXmCodeUnique" parameterType="String" resultMap="SpdeptXmResult">
+		<include refid="selectSpdeptXmVo"/>
+		 where xmcode=#{xmcode}
+	</select>
+    
+</mapper>

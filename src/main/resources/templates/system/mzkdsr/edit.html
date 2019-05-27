@@ -1,0 +1,353 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-mzkdsr-edit" th:object="${mzkdsr}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">开单科室：</label>
+				<div class="col-sm-8">
+					<input id="kdks" name="kdks" th:field="*{kdks}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">住院归属科室：</label>
+				<div class="col-sm-8">
+					<input id="zygsks" name="zygsks" th:field="*{zygsks}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">人次：</label>
+				<div class="col-sm-8">
+					<input id="rc" name="rc" th:field="*{rc}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">挂号费：</label>
+				<div class="col-sm-8">
+					<input id="guf" name="guf" th:field="*{guf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">西药费：</label>
+				<div class="col-sm-8">
+					<input id="xyf" name="xyf" th:field="*{xyf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">中成药：</label>
+				<div class="col-sm-8">
+					<input id="zcyf" name="zcyf" th:field="*{zcyf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">中草药：</label>
+				<div class="col-sm-8">
+					<input id="zcaoy" name="zcaoy" th:field="*{zcaoy}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">检查费：</label>
+				<div class="col-sm-8">
+					<input id="jcf" name="jcf" th:field="*{jcf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">治疗费：</label>
+				<div class="col-sm-8">
+					<input id="zlf" name="zlf" th:field="*{zlf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">放射：</label>
+				<div class="col-sm-8">
+					<input id="fs" name="fs" th:field="*{fs}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">手术费：</label>
+				<div class="col-sm-8">
+					<input id="ssf" name="ssf" th:field="*{ssf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">化验费：</label>
+				<div class="col-sm-8">
+					<input id="hyf" name="hyf" th:field="*{hyf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">其它费：</label>
+				<div class="col-sm-8">
+					<input id="qtf" name="qtf" th:field="*{qtf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">核磁：</label>
+				<div class="col-sm-8">
+					<input id="hc" name="hc" th:field="*{hc}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">超声费：</label>
+				<div class="col-sm-8">
+					<input id="csf" name="csf" th:field="*{csf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">心电图：</label>
+				<div class="col-sm-8">
+					<input id="xdt" name="xdt" th:field="*{xdt}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">高压氧：</label>
+				<div class="col-sm-8">
+					<input id="gyy" name="gyy" th:field="*{gyy}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">诊疗费：</label>
+				<div class="col-sm-8">
+					<input id="zhenliaof" name="zhenliaof" th:field="*{zhenliaof}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">材料费：</label>
+				<div class="col-sm-8">
+					<input id="clf" name="clf" th:field="*{clf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">CT：</label>
+				<div class="col-sm-8">
+					<input id="ct" name="ct" th:field="*{ct}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">监护费：</label>
+				<div class="col-sm-8">
+					<input id="jhf" name="jhf" th:field="*{jhf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">麻醉费：</label>
+				<div class="col-sm-8">
+					<input id="mzf" name="mzf" th:field="*{mzf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">煎药费：</label>
+				<div class="col-sm-8">
+					<input id="jyf" name="jyf" th:field="*{jyf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">病理：</label>
+				<div class="col-sm-8">
+					<input id="bl" name="bl" th:field="*{bl}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">理疗费：</label>
+				<div class="col-sm-8">
+					<input id="liliaof" name="liliaof" th:field="*{liliaof}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">救护车：</label>
+				<div class="col-sm-8">
+					<input id="jhc" name="jhc" th:field="*{jhc}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">针灸：</label>
+				<div class="col-sm-8">
+					<input id="zj" name="zj" th:field="*{zj}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">氧气：</label>
+				<div class="col-sm-8">
+					<input id="yq" name="yq" th:field="*{yq}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">输血：</label>
+				<div class="col-sm-8">
+					<input id="sx" name="sx" th:field="*{sx}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">抢救费：</label>
+				<div class="col-sm-8">
+					<input id="qjf" name="qjf" th:field="*{qjf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">血透费：</label>
+				<div class="col-sm-8">
+					<input id="xtf" name="xtf" th:field="*{xtf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">内窥镜：</label>
+				<div class="col-sm-8">
+					<input id="nkj" name="nkj" th:field="*{nkj}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">人工器官：</label>
+				<div class="col-sm-8">
+					<input id="rgqg" name="rgqg" th:field="*{rgqg}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">运动平板：</label>
+				<div class="col-sm-8">
+					<input id="ydpb" name="ydpb" th:field="*{ydpb}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">血气分析：</label>
+				<div class="col-sm-8">
+					<input id="xqfx" name="xqfx" th:field="*{xqfx}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">TCD：</label>
+				<div class="col-sm-8">
+					<input id="tcd" name="tcd" th:field="*{tcd}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">眼科AB超：</label>
+				<div class="col-sm-8">
+					<input id="ykabchao" name="ykabchao" th:field="*{ykabchao}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">内分泌化验：</label>
+				<div class="col-sm-8">
+					<input id="nfmhy" name="nfmhy" th:field="*{nfmhy}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">动态心电图：</label>
+				<div class="col-sm-8">
+					<input id="dtxdy" name="dtxdy" th:field="*{dtxdy}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">动态血压：</label>
+				<div class="col-sm-8">
+					<input id="dtxy" name="dtxy" th:field="*{dtxy}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">碎石费：</label>
+				<div class="col-sm-8">
+					<input id="suishif" name="suishif" th:field="*{suishif}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">本科化验：</label>
+				<div class="col-sm-8">
+					<input id="bkhy" name="bkhy" th:field="*{bkhy}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">呼吸医技：</label>
+				<div class="col-sm-8">
+					<input id="hxyj" name="hxyj" th:field="*{hxyj}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">病理(TCT)：</label>
+				<div class="col-sm-8">
+					<input id="bltct" name="bltct" th:field="*{bltct}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">放射材料：</label>
+				<div class="col-sm-8">
+					<input id="fscl" name="fscl" th:field="*{fscl}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">皮科检查：</label>
+				<div class="col-sm-8">
+					<input id="pkjc" name="pkjc" th:field="*{pkjc}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">骨密度检查：</label>
+				<div class="col-sm-8">
+					<input id="gmdjc" name="gmdjc" th:field="*{gmdjc}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">眼底照相：</label>
+				<div class="col-sm-8">
+					<input id="ydzx" name="ydzx" th:field="*{ydzx}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">本科检查：</label>
+				<div class="col-sm-8">
+					<input id="bkjc" name="bkjc" th:field="*{bkjc}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">HPV检查：</label>
+				<div class="col-sm-8">
+					<input id="hpvjc" name="hpvjc" th:field="*{hpvjc}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">脉冲磁疗：</label>
+				<div class="col-sm-8">
+					<input id="mccl" name="mccl" th:field="*{mccl}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">医事服务费：</label>
+				<div class="col-sm-8">
+					<input id="ysfwf" name="ysfwf" th:field="*{ysfwf}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">推拿：</label>
+				<div class="col-sm-8">
+					<input id="tn" name="tn" th:field="*{tn}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">口腔放射：</label>
+				<div class="col-sm-8">
+					<input id="kqfs" name="kqfs" th:field="*{kqfs}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/mzkdsr"
+		$("#form-mzkdsr-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-mzkdsr-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

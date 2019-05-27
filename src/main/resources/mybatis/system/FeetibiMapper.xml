@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.feetibi.mapper.FeetibiMapper">
+    
+    <resultMap type="Feetibi" id="FeetibiResult">
+        <result property="id"    column="id"    />
+        <result property="deptid"    column="deptid"    />
+        <result property="feeid"    column="feeid"    />
+        <result property="tibi"    column="tibi"    />
+        <result property="flag"    column="flag"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="updatetime"    column="updatetime"    />
+        <association property="feetype"  column="feeid" javaType="Feetype" resultMap="feetypeResult" />
+        <association property="dept" column="deptid" javaType="Dept" resultMap="deptResult" />
+    </resultMap>
+    
+    <resultMap type="Feetype" id="feetypeResult">
+        <id property="id" column="id" />
+        <result property="feecode" column="feecode" />
+        <result property="feename" column="feename" />
+    </resultMap>
+    
+    <resultMap id="deptResult" type="Dept">
+		<id     property="deptId"   column="dept_id"     />
+		<result property="parentId" column="parent_id"   />
+		<result property="deptName" column="dept_name"   />
+		<result property="orderNum" column="order_num"   />
+		<result property="status"   column="dept_status" />
+	</resultMap>
+	
+	<sql id="selectFeetibiVo">
+        select 
+            f.id, f.deptid, f.feeid, f.tibi, f.flag, f.createtime, f.updatetime,
+            d.dept_id, d.parent_id, d.dept_name, d.order_num, 
+            t.id, t.feecode, t.feename
+        from 
+            sys_feetibi f
+            left join sys_dept d on f.deptid = d.dept_id
+            left join sys_feetype t on f.feeid= t.id
+    </sql>
+	
+    <select id="selectFeetibiList" parameterType="Feetibi" resultMap="FeetibiResult">
+        <include refid="selectFeetibiVo"/>
+        <where>  
+             <if test="id != null "> and f.id = #{id}</if>
+             <if test="deptid != null "> and deptid = #{deptid}</if>
+             <if test="feeid != null "> and feeid = #{feeid}</if>
+             <if test="tibi != null "> and tibi = #{tibi}</if>
+             <if test="flag != null "> and flag = #{flag}</if>
+             <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+			     and date_format(f.createtime,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+			 </if>
+			
+			 <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+				 and date_format(f.createtime,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+			 </if>
+         </where>
+    </select>
+    
+    <select id="selectFeetibiById" parameterType="Integer" resultMap="FeetibiResult">
+        <include refid="selectFeetibiVo"/>
+        where f.id = #{id}
+    </select>
+        
+    <insert id="insertFeetibi" parameterType="Feetibi">
+        insert into sys_feetibi
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="deptid != null  ">deptid,</if>
+			<if test="feeid != null  ">feeid,</if>
+			<if test="tibi != null  ">tibi,</if>
+			<if test="flag != null  ">flag,</if>
+            createtime
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="deptid != null  ">#{deptid},</if>
+			<if test="feeid != null  ">#{feeid},</if>
+			<if test="tibi != null  ">#{tibi},</if>
+			<if test="flag != null  ">#{flag},</if>
+			sysdate()
+         </trim>
+    </insert>
+	 
+    <update id="updateFeetibi" parameterType="Feetibi">
+        update sys_feetibi
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptid != null  ">deptid = #{deptid},</if>
+            <if test="feeid != null  ">feeid = #{feeid},</if>
+            <if test="tibi != null  ">tibi = #{tibi},</if>
+            <if test="flag != null  ">flag = #{flag},</if>
+            updatetime = sysdate()
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteFeetibiById" parameterType="Integer">
+        delete from sys_feetibi where id = #{id}
+    </delete>
+	
+    <delete id="deleteFeetibiByIds" parameterType="String">
+        delete from sys_feetibi where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <select id="checkFeeByTibi" parameterType="String" resultMap="FeetibiResult">
+	    <include refid="selectFeetibiVo"/>
+		where f.tibi = #{tibi}
+	</select>
+	
+	<select id="checkFeeByFeeType" parameterType="String" resultMap="FeetibiResult">
+	    <include refid="selectFeetibiVo"/>
+		where f.deptid = #{deptid} and f.feeid= # {feeid} and f.flag = #{flag}
+	</select>
+</mapper>
