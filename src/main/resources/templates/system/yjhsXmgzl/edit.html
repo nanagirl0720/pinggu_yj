@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-yjhsXmgzl-edit" th:object="${yjhsXmgzl}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">日期：</label>
+				<div class="col-sm-8">
+					<input id="rq" name="rq" th:field="*{rq}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">绩效单元id：</label>
+				<div class="col-sm-8">
+					<input id="deptid" name="deptid" th:field="*{deptid}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">绩效单元名称：</label>
+				<div class="col-sm-8">
+					<input id="deptname" name="deptname" th:field="*{deptname}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">执行科室号：</label>
+				<div class="col-sm-8">
+					<input id="zxks" name="zxks" th:field="*{zxks}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目编号：</label>
+				<div class="col-sm-8">
+					<input id="xmh" name="xmh" th:field="*{xmh}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目名称：</label>
+				<div class="col-sm-8">
+					<input id="xmmc" name="xmmc" th:field="*{xmmc}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目价值系数：</label>
+				<div class="col-sm-8">
+					<input id="xmjzxs" name="xmjzxs" th:field="*{xmjzxs}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">工作量：</label>
+				<div class="col-sm-8">
+					<input id="gzl" name="gzl" th:field="*{gzl}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">金额：</label>
+				<div class="col-sm-8">
+					<input id="je" name="je" th:field="*{je}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目绩效：</label>
+				<div class="col-sm-8">
+					<input id="xmjx" name="xmjx" th:field="*{xmjx}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">0体检 1门诊 2住院 3住院退费：</label>
+				<div class="col-sm-8">
+					<input id="flag" name="flag" th:field="*{flag}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/yjhsXmgzl"
+		$("#form-yjhsXmgzl-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-yjhsXmgzl-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

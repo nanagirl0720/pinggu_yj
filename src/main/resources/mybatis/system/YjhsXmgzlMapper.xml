@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.yjhsXmgzl.mapper.YjhsXmgzlMapper">
+    
+    <resultMap type="YjhsXmgzl" id="YjhsXmgzlResult">
+        <result property="id"    column="id"    />
+        <result property="rq"    column="rq"    />
+        <result property="deptid"    column="deptid"    />
+        <result property="deptname"    column="deptname"    />
+        <result property="zxks"    column="zxks"    />
+        <result property="xmh"    column="xmh"    />
+        <result property="xmmc"    column="xmmc"    />
+        <result property="xmjzxs"    column="xmjzxs"    />
+        <result property="gzl"    column="gzl"    />
+        <result property="dj"    column="dj"    />
+        <result property="je"    column="je"    />
+        <result property="xmjx"    column="xmjx"    />
+        <result property="flag"    column="flag"    />
+        <!-- association关联关系  collection集合关系 -->
+        <association property="yjxm"    column="xmid" javaType="Yjxm" resultMap="yjxmResult" />
+        <association property="dept"    column="dept_id" javaType="Dept" resultMap="deptResult" />
+        <association property="ks"    column="ksid" javaType="Ks" resultMap="ksResult" />
+        <association property="hisMz"    column="ea_sfxm_id" javaType="HisMz" resultMap="hisMzResult" />
+        <association property="hisZy"    column="ea_xmh" javaType="HisZy" resultMap="hisZyResult" />
+        <association property="hisZytf"    column="ea_xmh" javaType="HisZytf" resultMap="hisZytfResult" />
+  		<association property="yjxmKssb"    column="xmid" javaType="YjxmKssb" resultMap="yjxmKssbResult" />
+    </resultMap>
+    
+    <resultMap id="hisMzResult" type="HisMz">
+    	<id property="eaSfxmId" column="ea_sfxm_id"/>
+    	<result property="eaSfrq" column="ea_sfrq"/>
+    	<result property="eaZxksh" column="ea_zxksh"/>
+    	<result property="eaDj" column="ea_dj"/>
+    	<result property="eaSl" column="ea_sl"/>
+    	<result property="eaJe" column="ea_je"/>
+    </resultMap>
+    
+    <resultMap id="hisZyResult" type="HisZy">
+    	<id property="eaXmh" column="ea_xmh"/>
+    	<result property="eaRq" column="ea_rq"/>
+    	<result property="eaZxksh" column="ea_zxksh"/>
+    	<result property="eaDj" column="ea_dj"/>
+    	<result property="eaSl" column="ea_sl"/>
+    	<result property="eaJe" column="ea_je"/>
+    </resultMap>
+    
+    <resultMap id="hisZytfResult" type="HisZytf">
+    	<id property="eaXmh" column="ea_xmh"/>
+    	<result property="eaRq" column="ea_rq"/>
+    	<result property="eaZxksh" column="ea_zxksh"/>
+    	<result property="eaDj" column="ea_dj"/>
+    	<result property="eaSl" column="ea_sl"/>
+    	<result property="eaJe" column="ea_je"/>
+    </resultMap>
+    
+    <resultMap id="yjxmResult" type="Yjxm">
+		<id property="xmid" column="xmid"/>
+		<result property="xmmc" column="xmmc"/>
+		<result property="xmprice" column="xmprice"/>
+		<result property="xmjzxs" column="xmjzxs"/>
+		<result property="ssks" column="ssks"/>
+	</resultMap>
+    
+    <resultMap type="YjxmKssb" id="yjxmKssbResult">
+    	<id property="xmid" column="xmid"/>
+		<result property="rq" column="rq"/>
+    </resultMap>
+    
+	<resultMap id="ksResult" type="Ks">
+		<id property="ksid" column="ksid"/>
+		<result property="ksname" column="ksname"/>
+		<result property="jxdyid" column="jxdyid"/>
+	</resultMap>
+	
+	<resultMap id="deptResult" type="dept">
+		<id property="deptId" column="dept_id"/>
+		<result property="deptName" column="dept_name"/>
+	</resultMap>
+	
+	<sql id="selectYjhsXmgzlVo">
+        select id, rq, deptid, deptname, zxks, xmh, xmmc, xmjzxs, gzl, dj, je, xmjx, flag from sys_yjhs_xmgzl
+    </sql>
+	
+    <select id="selectYjhsXmgzlList" parameterType="YjhsXmgzl" resultMap="YjhsXmgzlResult">
+        <include refid="selectYjhsXmgzlVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="rq != null  and rq != '' "> and rq = #{rq}</if>
+             <if test="deptid != null "> and deptid = #{deptid}</if>
+             <if test="deptname != null  and deptname != '' "> and deptname = #{deptname}</if>
+             <if test="zxks != null "> and zxks = #{zxks}</if>
+             <if test="xmh != null "> and xmh = #{xmh}</if>
+             <if test="xmmc != null  and xmmc != '' "> and xmmc = #{xmmc}</if>
+             <if test="xmjzxs != null "> and xmjzxs = #{xmjzxs}</if>
+             <if test="gzl != null "> and gzl = #{gzl}</if>
+             <if test="dj != null "> and dj = #{dj}</if>
+             <if test="je != null "> and je = #{je}</if>
+             <if test="xmjx != null "> and xmjx = #{xmjx}</if>
+             <if test="flag != null  and flag != '' "> and flag = #{flag}</if>
+         </where>
+    </select>
+    
+    <select id="selectYjhsXmgzlById" parameterType="Integer" resultMap="YjhsXmgzlResult">
+        <include refid="selectYjhsXmgzlVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertYjhsXmgzl" parameterType="YjhsXmgzl">
+        insert into sys_yjhs_xmgzl
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="rq != null  and rq != ''  ">rq,</if>
+			<if test="deptid != null  ">deptid,</if>
+			<if test="deptname != null  and deptname != ''  ">deptname,</if>
+			<if test="zxks != null  ">zxks,</if>
+			<if test="xmh != null  ">xmh,</if>
+			<if test="xmmc != null  and xmmc != ''  ">xmmc,</if>
+			<if test="xmjzxs != null  ">xmjzxs,</if>
+			<if test="gzl != null  ">gzl,</if>
+			<if test="dj != null  ">dj,</if>
+			<if test="je != null  ">je,</if>
+			<if test="xmjx != null  ">xmjx,</if>
+			<if test="flag != null  and flag != ''  ">flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="rq != null  and rq != ''  ">#{rq},</if>
+			<if test="deptid != null  ">#{deptid},</if>
+			<if test="deptname != null  and deptname != ''  ">#{deptname},</if>
+			<if test="zxks != null  ">#{zxks},</if>
+			<if test="xmh != null  ">#{xmh},</if>
+			<if test="xmmc != null  and xmmc != ''  ">#{xmmc},</if>
+			<if test="xmjzxs != null  ">#{xmjzxs},</if>
+			<if test="gzl != null  ">#{gzl},</if>
+			<if test="dj != null  ">#{dj},</if>
+			<if test="je != null  ">#{je},</if>
+			<if test="xmjx != null  ">#{xmjx},</if>
+			<if test="flag != null  and flag != ''  ">#{flag},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateYjhsXmgzl" parameterType="YjhsXmgzl">
+        update sys_yjhs_xmgzl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="rq != null  and rq != ''  ">rq = #{rq},</if>
+            <if test="deptid != null  ">deptid = #{deptid},</if>
+            <if test="deptname != null  and deptname != ''  ">deptname = #{deptname},</if>
+            <if test="zxks != null  ">zxks = #{zxks},</if>
+            <if test="xmh != null  ">xmh = #{xmh},</if>
+            <if test="xmmc != null  and xmmc != ''  ">xmmc = #{xmmc},</if>
+            <if test="xmjzxs != null  ">xmjzxs = #{xmjzxs},</if>
+            <if test="gzl != null  ">gzl = #{gzl},</if>
+            <if test="dj != null  ">dj = #{dj},</if>
+            <if test="je != null  ">je = #{je},</if>
+            <if test="xmjx != null  ">xmjx = #{xmjx},</if>
+            <if test="flag != null  and flag != ''  ">flag = #{flag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteYjhsXmgzlById" parameterType="Integer">
+        delete from sys_yjhs_xmgzl where id = #{id}
+    </delete>
+	
+    <delete id="deleteYjhsXmgzlByIds" parameterType="String">
+        delete from sys_yjhs_xmgzl where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <select id="selectYjhsXmgzlByRq" parameterType="String" resultType="int">
+    	SELECT count(rq) FROM sys_yjhs_xmgzl  where rq=#{rq}
+    </select>
+    
+    <select id="selectSbgzlByRq"  parameterType="String" resultType="int">
+    	SELECT count(rq) FROM sys_yjhs_xmgzl where xmh like concat('bts','%') and rq=#{rq}
+    </select>
+    
+    <!-- 开始核算：根据日期核算该月医技工作量 -->
+    <select id="selectYjhsXmgzlByRiq" parameterType="string"  resultMap="YjhsXmgzlResult">
+    	select z.rq,k.jxdyid deptid,d.dept_name deptname,z.ea_zxksh zxks,z.ea_xmh xmh,y.xmmc,y.xmjzxs,z.sl gzl,z.ea_dj dj,z.je,y.xmjzxs*z.sl xmjx,2 flag
+		from(
+		select date_format(ea_rq,'%Y-%m') rq,ea_zxksh,ea_xmh,ea_dj,sum(ea_sl) sl,sum(ea_je) je from sys_his_zy where  date_format(ea_rq,'%Y-%m')=#{rq}  and ea_zxksh in('251','405','267','410','243','408','409','411','429','430','438','439','404','444','449')
+		GROUP BY date_format(ea_rq,'%Y-%m') ,ea_zxksh,ea_xmh,ea_dj
+		)z,sys_yjxm y,sys_dept d,sys_ks k
+		where z.ea_xmh=y.xmid and z.ea_zxksh=k.ksid and k.jxdyid=d.dept_id 
+		union all
+
+    select z.rq,k.jxdyid deptid,d.dept_name deptname,z.ea_zxksh zxks,z.ea_xmh xmh,y.xmmc,y.xmjzxs,z.sl gzl,z.ea_dj dj,z.je,y.xmjzxs*z.sl xmjx,3 flag		
+		from(
+		select date_format(ea_rq,'%Y-%m') rq,ea_zxksh,ea_xmh,ea_dj,sum(ea_sl) sl,sum(ea_je) je from sys_his_zytf where  date_format(ea_rq,'%Y-%m')=#{rq}   and ea_zxksh in('251','405','267','410','243','408','409','411','429','430','438','439','404','444','449')
+		GROUP BY date_format(ea_rq,'%Y-%m') ,ea_zxksh,ea_xmh,ea_dj
+		)z,sys_yjxm y,sys_dept d,sys_ks k
+		where z.ea_xmh=y.xmid and z.ea_zxksh=k.ksid and k.jxdyid=d.dept_id 
+		union all
+		
+    select z.rq,k.jxdyid deptid,d.dept_name deptname,z.ea_zxksh zxks,z.ea_sfxm_id xmh,y.xmmc,y.xmjzxs,z.sl gzl,z.ea_dj dj,z.je,y.xmjzxs*z.sl xmjx,1 flag	 	
+		from(
+		select date_format(ea_sfrq,'%Y-%m') rq,ea_zxksh,ea_sfxm_id,ea_dj,sum(ea_sl) sl,sum(ea_je) je from sys_his_mz where  date_format(ea_sfrq,'%Y-%m')=#{rq}   and ea_zxksh in('251','405','267','410','243','408','409','411','429','430','438','439','404','444','449')
+		GROUP BY date_format(ea_sfrq,'%Y-%m') ,ea_zxksh,ea_sfxm_id,ea_dj
+		)z,sys_yjxm y,sys_dept d,sys_ks k
+		where z.ea_sfxm_id=y.xmid and z.ea_zxksh=k.ksid and k.jxdyid=d.dept_id 
+    </select>
+    
+    <!-- 根据日期查询数据 -->
+    <select id="selectAllByRq" parameterType="string" resultMap="YjhsXmgzlResult">
+    	SELECT sb.rq,141 deptid,'病理科' deptname,405 zxks,sb.xmid xmh,yj.xmmc,yj.xmjzxs,sb.sl gzl,yj.xmprice dj,yj.xmprice*sb.sl je,sb.sl*yj.xmjzxs xmjx,4 flag FROM sys_yjxm_kssb sb,sys_yjxm yj where sb.xmid=yj.xmid and sb.rq=#{rq}
+    </select>
+</mapper>

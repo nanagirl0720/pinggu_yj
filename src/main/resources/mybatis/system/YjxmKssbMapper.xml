@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.yjxmKssb.mapper.YjxmKssbMapper">
+    
+    <resultMap type="YjxmKssb" id="YjxmKssbResult">
+        <id		property="id"    column="id"    />
+        <result property="rq"    column="rq"    />
+        <result property="xmid"    column="xmid"    />
+        <result property="xmmc"    column="xmmc"    />
+        <result property="xmprice"    column="xmprice"    />
+        <result property="sl"    column="sl"    />
+        <result property="je"    column="je"    />
+        <association property="yjxm"    column="xmid" javaType="Yjxm" resultMap="yjxmResult" />
+    </resultMap>
+	<resultMap id="yjxmResult" type="Yjxm">
+		<id property="xmid" column="xmid"/>
+		<result property="xmmc" column="xmmc"/>
+		<result property="xmprice" column="xmprice"/>
+		<result property="xmjzxs" column="xmjzxs"/>
+		<result property="ssks" column="ssks"/>
+	</resultMap>
+	
+	<sql id="selectYjxmKssbVo">
+        select id, rq, xmid, xmmc, xmprice, sl, je from sys_yjxm_kssb
+    </sql>
+	
+    <select id="selectYjxmKssbList" parameterType="YjxmKssb" resultMap="YjxmKssbResult">
+        <include refid="selectYjxmKssbVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="rq != null  and rq != '' "> and rq = #{rq}</if>
+             <if test="xmid != null  and xmid != '' "> and xmid = #{xmid}</if>
+             <if test="xmmc != null  and xmmc != '' "> and xmmc = #{xmmc}</if>
+             <if test="xmprice != null "> and xmprice = #{xmprice}</if>
+             <if test="sl != null "> and sl = #{sl}</if>
+             <if test="je != null "> and je = #{je}</if>
+         </where>
+    </select>
+    
+    <select id="selectYjxmKssbById" parameterType="Integer" resultMap="YjxmKssbResult">
+        <include refid="selectYjxmKssbVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertYjxmKssb" parameterType="YjxmKssb">
+        insert into sys_yjxm_kssb
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="rq != null  and rq != ''  ">rq,</if>
+			<if test="xmid != null  and xmid != ''  ">xmid,</if>
+			<if test="xmmc != null  and xmmc != ''  ">xmmc,</if>
+			<if test="xmprice != null  ">xmprice,</if>
+			<if test="sl != null  ">sl,</if>
+			<if test="je != null  ">je,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="rq != null  and rq != ''  ">#{rq},</if>
+			<if test="xmid != null  and xmid != ''  ">#{xmid},</if>
+			<if test="xmmc != null  and xmmc != ''  ">#{xmmc},</if>
+			<if test="xmprice != null  ">#{xmprice},</if>
+			<if test="sl != null  ">#{sl},</if>
+			<if test="je != null  ">#{je},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateYjxmKssb" parameterType="YjxmKssb">
+        update sys_yjxm_kssb
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="rq != null  and rq != ''  ">rq = #{rq},</if>
+            <if test="xmid != null  and xmid != ''  ">xmid = #{xmid},</if>
+            <if test="xmmc != null  and xmmc != ''  ">xmmc = #{xmmc},</if>
+            <if test="xmprice != null  ">xmprice = #{xmprice},</if>
+            <if test="sl != null  ">sl = #{sl},</if>
+            <if test="je != null  ">je = #{je},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteYjxmKssbById" parameterType="Integer">
+        delete from sys_yjxm_kssb where id = #{id}
+    </delete>
+	
+    <delete id="deleteYjxmKssbByIds" parameterType="String">
+        delete from sys_yjxm_kssb where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <select id="selectYjxmBlsb"  parameterType="YjxmKssb" resultMap="YjxmKssbResult">
+    	select rq, sb.xmid, yj.xmmc, yj.xmprice, sb.sl, yj.xmprice*sb.sl je from sys_yjxm_kssb sb,sys_yjxm yj
+		WHERE sb.xmid=yj.xmid
+    </select>
+    
+    <!-- 根据日期查询数据 -->
+    <select id="selectAllByRq" parameterType="string" resultMap="YjxmKssbResult">
+    	SELECT sb.rq,141 deptid,'病理科' deptname,405 zxks,sb.xmid xmh,sb.xmmc,yj.xmjzxs,sb.sl gzl,yj.xmprice dj,yj.xmprice*sb.sl je,sb.sl*yj.xmjzxs xmjx,4 flag FROM sys_yjxm_kssb sb,sys_yjxm yj where sb.xmid=yj.xmid and sb.rq=#{rq}
+    </select>
+    <!-- 查看当月上报日期是否核算过 -->
+    <select id="selectSbByRq" parameterType="string" resultType="int">
+    	SELECT count(rq) FROM sys_yjxm_kssb  where rq=#{rq}
+    </select>
+</mapper>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.hisZytf.mapper.HisZytfMapper">
+    
+    <resultMap type="HisZytf" id="HisZytfResult">
+        <result property="id"    column="id"    />
+        <result property="eaId"    column="EA_id"    />
+        <result property="eaAno"    column="EA_ano"    />
+        <result property="eaJzsh"    column="EA_jzsh"    />
+        <result property="eaRbid"    column="EA_rbid"    />
+        <result property="eaXmh"    column="EA_xmh"    />
+        <result property="eaDj"    column="EA_dj"    />
+        <result property="eaSl"    column="EA_sl"    />
+        <result property="eaJe"    column="EA_je"    />
+        <result property="eaZxksh"    column="EA_zxksh"    />
+        <result property="eaZxysh"    column="EA_zxysh"    />
+        <result property="eaKdksh"    column="EA_kdksh"    />
+        <result property="eaYsh"    column="EA_ysh"    />
+        <result property="eaRq"    column="EA_rq"    />
+        <result property="eaCzgh"    column="EA_czgh"    />
+        <result property="eaGfbz"    column="EA_gfbz"    />
+        <result property="eaBmh"    column="EA_bmh"    />
+        <result property="eaAutoSm"    column="EA_auto_sm"    />
+        <result property="eaYeId"    column="EA_ye_id"    />
+        <result property="eaYbbz"    column="EA_ybbz"    />
+        <result property="eaYbzfbl"    column="EA_ybzfbl"    />
+        <result property="eaYbspbh"    column="EA_ybspbh"    />
+        <result property="eaYbdj"    column="EA_ybdj"    />
+        <result property="eaXmgbh"    column="EA_xmgbh"    />
+        <result property="eaBxbl"    column="EA_bxbl"    />
+        <result property="eaDbbz"    column="EA_dbbz"    />
+        <result property="eaZkbmh"    column="EA_zkbmh"    />
+        <result property="eaZzysh"    column="EA_zzysh"    />
+        <result property="eaDyylz"    column="EA_dyylz"    />
+        <result property="eaCwh"    column="EA_cwh"    />
+        <result property="eaYbcsbz"    column="EA_ybcsbz"    />
+        <result property="eaJcbz"    column="EA_jcbz"    />
+        <result property="eaXtid"    column="EA_xtid"    />
+        <result property="eaYxtid"    column="EA_yxtid"    />
+        <result property="eaIcuYbmh"    column="EA_icu_ybmh"    />
+        <result property="eaYbdm"    column="EA_ybdm"    />
+        <result property="eaHismac"    column="EA_hismac"    />
+        <result property="eaYbspxz"    column="EA_ybspxz"    />
+        <result property="eaTcsm"    column="EA_tcsm"    />
+        <result property="eaYhje"    column="EA_yhje"    />
+        <result property="eaClxx"    column="EA_clxx"    />
+        <result property="eaFbsm"    column="EA_fbsm"    />
+        <result property="eaZxbz"    column="EA_zxbz"    />
+        <result property="eaFdrfy"    column="EA_fdrfy"    />
+        <result property="eaYbzfje"    column="EA_ybzfje"    />
+        <result property="eaYbzlje"    column="EA_ybzlje"    />
+        <result property="eaTxbfYbmh"    column="ea_txbf_ybmh"    />
+        <result property="eaTfyy"    column="EA_tfyy"    />
+        <result property="eaFyfsrq"    column="EA_fyfsrq"    />
+        <result property="eaClgrdh"    column="EA_clgrdh"    />
+        <result property="eaWybz"    column="EA_wybz"    />
+        <result property="eaBlsfxx"    column="EA_blsfxx"    />
+        <result property="eaYhSm"    column="EA_yh_sm"    />
+    </resultMap>
+	
+	<sql id="selectHisZytfVo">
+        select id, EA_id, EA_ano, EA_jzsh, EA_rbid, EA_xmh, EA_dj, EA_sl, EA_je, EA_zxksh, EA_zxysh, EA_kdksh, EA_ysh, EA_rq, EA_czgh, EA_gfbz, EA_bmh, EA_auto_sm, EA_ye_id, EA_ybbz, EA_ybzfbl, EA_ybspbh, EA_ybdj, EA_xmgbh, EA_bxbl, EA_dbbz, EA_zkbmh, EA_zzysh, EA_dyylz, EA_cwh, EA_ybcsbz, EA_jcbz, EA_xtid, EA_yxtid, EA_icu_ybmh, EA_ybdm, EA_hismac, EA_ybspxz, EA_tcsm, EA_yhje, EA_clxx, EA_fbsm, EA_zxbz, EA_fdrfy, EA_ybzfje, EA_ybzlje, ea_txbf_ybmh, EA_tfyy, EA_fyfsrq, EA_clgrdh, EA_wybz, EA_blsfxx, EA_yh_sm from sys_his_zytf
+    </sql>
+	
+    <select id="selectHisZytfList" parameterType="HisZytf" resultMap="HisZytfResult">
+        <include refid="selectHisZytfVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="eaId != null  and eaId != '' "> and EA_id = #{eaId}</if>
+             <if test="eaAno != null  and eaAno != '' "> and EA_ano = #{eaAno}</if>
+             <if test="eaJzsh != null  and eaJzsh != '' "> and EA_jzsh = #{eaJzsh}</if>
+             <if test="eaRbid != null  and eaRbid != '' "> and EA_rbid = #{eaRbid}</if>
+             <if test="eaXmh != null  and eaXmh != '' "> and EA_xmh = #{eaXmh}</if>
+             <if test="eaDj != null  and eaDj != '' "> and EA_dj = #{eaDj}</if>
+             <if test="eaSl != null  and eaSl != '' "> and EA_sl = #{eaSl}</if>
+             <if test="eaJe != null  and eaJe != '' "> and EA_je = #{eaJe}</if>
+             <if test="eaZxksh != null  and eaZxksh != '' "> and EA_zxksh = #{eaZxksh}</if>
+             <if test="eaZxysh != null  and eaZxysh != '' "> and EA_zxysh = #{eaZxysh}</if>
+             <if test="eaKdksh != null  and eaKdksh != '' "> and EA_kdksh = #{eaKdksh}</if>
+             <if test="eaYsh != null  and eaYsh != '' "> and EA_ysh = #{eaYsh}</if>
+             <if test="eaRq != null  and eaRq != '' "> and EA_rq = #{eaRq}</if>
+             <if test="eaCzgh != null  and eaCzgh != '' "> and EA_czgh = #{eaCzgh}</if>
+             <if test="eaGfbz != null  and eaGfbz != '' "> and EA_gfbz = #{eaGfbz}</if>
+             <if test="eaBmh != null  and eaBmh != '' "> and EA_bmh = #{eaBmh}</if>
+             <if test="eaAutoSm != null  and eaAutoSm != '' "> and EA_auto_sm = #{eaAutoSm}</if>
+             <if test="eaYeId != null  and eaYeId != '' "> and EA_ye_id = #{eaYeId}</if>
+             <if test="eaYbbz != null  and eaYbbz != '' "> and EA_ybbz = #{eaYbbz}</if>
+             <if test="eaYbzfbl != null  and eaYbzfbl != '' "> and EA_ybzfbl = #{eaYbzfbl}</if>
+             <if test="eaYbspbh != null  and eaYbspbh != '' "> and EA_ybspbh = #{eaYbspbh}</if>
+             <if test="eaYbdj != null  and eaYbdj != '' "> and EA_ybdj = #{eaYbdj}</if>
+             <if test="eaXmgbh != null  and eaXmgbh != '' "> and EA_xmgbh = #{eaXmgbh}</if>
+             <if test="eaBxbl != null  and eaBxbl != '' "> and EA_bxbl = #{eaBxbl}</if>
+             <if test="eaDbbz != null  and eaDbbz != '' "> and EA_dbbz = #{eaDbbz}</if>
+             <if test="eaZkbmh != null  and eaZkbmh != '' "> and EA_zkbmh = #{eaZkbmh}</if>
+             <if test="eaZzysh != null  and eaZzysh != '' "> and EA_zzysh = #{eaZzysh}</if>
+             <if test="eaDyylz != null  and eaDyylz != '' "> and EA_dyylz = #{eaDyylz}</if>
+             <if test="eaCwh != null  and eaCwh != '' "> and EA_cwh = #{eaCwh}</if>
+             <if test="eaYbcsbz != null  and eaYbcsbz != '' "> and EA_ybcsbz = #{eaYbcsbz}</if>
+             <if test="eaJcbz != null  and eaJcbz != '' "> and EA_jcbz = #{eaJcbz}</if>
+             <if test="eaXtid != null  and eaXtid != '' "> and EA_xtid = #{eaXtid}</if>
+             <if test="eaYxtid != null  and eaYxtid != '' "> and EA_yxtid = #{eaYxtid}</if>
+             <if test="eaIcuYbmh != null  and eaIcuYbmh != '' "> and EA_icu_ybmh = #{eaIcuYbmh}</if>
+             <if test="eaYbdm != null  and eaYbdm != '' "> and EA_ybdm = #{eaYbdm}</if>
+             <if test="eaHismac != null  and eaHismac != '' "> and EA_hismac = #{eaHismac}</if>
+             <if test="eaYbspxz != null  and eaYbspxz != '' "> and EA_ybspxz = #{eaYbspxz}</if>
+             <if test="eaTcsm != null  and eaTcsm != '' "> and EA_tcsm = #{eaTcsm}</if>
+             <if test="eaYhje != null  and eaYhje != '' "> and EA_yhje = #{eaYhje}</if>
+             <if test="eaClxx != null  and eaClxx != '' "> and EA_clxx = #{eaClxx}</if>
+             <if test="eaFbsm != null  and eaFbsm != '' "> and EA_fbsm = #{eaFbsm}</if>
+             <if test="eaZxbz != null  and eaZxbz != '' "> and EA_zxbz = #{eaZxbz}</if>
+             <if test="eaFdrfy != null  and eaFdrfy != '' "> and EA_fdrfy = #{eaFdrfy}</if>
+             <if test="eaYbzfje != null  and eaYbzfje != '' "> and EA_ybzfje = #{eaYbzfje}</if>
+             <if test="eaYbzlje != null  and eaYbzlje != '' "> and EA_ybzlje = #{eaYbzlje}</if>
+             <if test="eaTxbfYbmh != null  and eaTxbfYbmh != '' "> and ea_txbf_ybmh = #{eaTxbfYbmh}</if>
+             <if test="eaTfyy != null  and eaTfyy != '' "> and EA_tfyy = #{eaTfyy}</if>
+             <if test="eaFyfsrq != null  and eaFyfsrq != '' "> and EA_fyfsrq = #{eaFyfsrq}</if>
+             <if test="eaClgrdh != null  and eaClgrdh != '' "> and EA_clgrdh = #{eaClgrdh}</if>
+             <if test="eaWybz != null  and eaWybz != '' "> and EA_wybz = #{eaWybz}</if>
+             <if test="eaBlsfxx != null  and eaBlsfxx != '' "> and EA_blsfxx = #{eaBlsfxx}</if>
+             <if test="eaYhSm != null  and eaYhSm != '' "> and EA_yh_sm = #{eaYhSm}</if>
+         </where>
+    </select>
+    
+    <select id="selectHisZytfById" parameterType="Integer" resultMap="HisZytfResult">
+        <include refid="selectHisZytfVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHisZytf" parameterType="HisZytf">
+        insert into sys_his_zytf
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="eaId != null  and eaId != ''  ">EA_id,</if>
+			<if test="eaAno != null  and eaAno != ''  ">EA_ano,</if>
+			<if test="eaJzsh != null  and eaJzsh != ''  ">EA_jzsh,</if>
+			<if test="eaRbid != null  and eaRbid != ''  ">EA_rbid,</if>
+			<if test="eaXmh != null  and eaXmh != ''  ">EA_xmh,</if>
+			<if test="eaDj != null  and eaDj != ''  ">EA_dj,</if>
+			<if test="eaSl != null  and eaSl != ''  ">EA_sl,</if>
+			<if test="eaJe != null  and eaJe != ''  ">EA_je,</if>
+			<if test="eaZxksh != null  and eaZxksh != ''  ">EA_zxksh,</if>
+			<if test="eaZxysh != null  and eaZxysh != ''  ">EA_zxysh,</if>
+			<if test="eaKdksh != null  and eaKdksh != ''  ">EA_kdksh,</if>
+			<if test="eaYsh != null  and eaYsh != ''  ">EA_ysh,</if>
+			<if test="eaRq != null  and eaRq != ''  ">EA_rq,</if>
+			<if test="eaCzgh != null  and eaCzgh != ''  ">EA_czgh,</if>
+			<if test="eaGfbz != null  and eaGfbz != ''  ">EA_gfbz,</if>
+			<if test="eaBmh != null  and eaBmh != ''  ">EA_bmh,</if>
+			<if test="eaAutoSm != null  and eaAutoSm != ''  ">EA_auto_sm,</if>
+			<if test="eaYeId != null  and eaYeId != ''  ">EA_ye_id,</if>
+			<if test="eaYbbz != null  and eaYbbz != ''  ">EA_ybbz,</if>
+			<if test="eaYbzfbl != null  and eaYbzfbl != ''  ">EA_ybzfbl,</if>
+			<if test="eaYbspbh != null  and eaYbspbh != ''  ">EA_ybspbh,</if>
+			<if test="eaYbdj != null  and eaYbdj != ''  ">EA_ybdj,</if>
+			<if test="eaXmgbh != null  and eaXmgbh != ''  ">EA_xmgbh,</if>
+			<if test="eaBxbl != null  and eaBxbl != ''  ">EA_bxbl,</if>
+			<if test="eaDbbz != null  and eaDbbz != ''  ">EA_dbbz,</if>
+			<if test="eaZkbmh != null  and eaZkbmh != ''  ">EA_zkbmh,</if>
+			<if test="eaZzysh != null  and eaZzysh != ''  ">EA_zzysh,</if>
+			<if test="eaDyylz != null  and eaDyylz != ''  ">EA_dyylz,</if>
+			<if test="eaCwh != null  and eaCwh != ''  ">EA_cwh,</if>
+			<if test="eaYbcsbz != null  and eaYbcsbz != ''  ">EA_ybcsbz,</if>
+			<if test="eaJcbz != null  and eaJcbz != ''  ">EA_jcbz,</if>
+			<if test="eaXtid != null  and eaXtid != ''  ">EA_xtid,</if>
+			<if test="eaYxtid != null  and eaYxtid != ''  ">EA_yxtid,</if>
+			<if test="eaIcuYbmh != null  and eaIcuYbmh != ''  ">EA_icu_ybmh,</if>
+			<if test="eaYbdm != null  and eaYbdm != ''  ">EA_ybdm,</if>
+			<if test="eaHismac != null  and eaHismac != ''  ">EA_hismac,</if>
+			<if test="eaYbspxz != null  and eaYbspxz != ''  ">EA_ybspxz,</if>
+			<if test="eaTcsm != null  and eaTcsm != ''  ">EA_tcsm,</if>
+			<if test="eaYhje != null  and eaYhje != ''  ">EA_yhje,</if>
+			<if test="eaClxx != null  and eaClxx != ''  ">EA_clxx,</if>
+			<if test="eaFbsm != null  and eaFbsm != ''  ">EA_fbsm,</if>
+			<if test="eaZxbz != null  and eaZxbz != ''  ">EA_zxbz,</if>
+			<if test="eaFdrfy != null  and eaFdrfy != ''  ">EA_fdrfy,</if>
+			<if test="eaYbzfje != null  and eaYbzfje != ''  ">EA_ybzfje,</if>
+			<if test="eaYbzlje != null  and eaYbzlje != ''  ">EA_ybzlje,</if>
+			<if test="eaTxbfYbmh != null  and eaTxbfYbmh != ''  ">ea_txbf_ybmh,</if>
+			<if test="eaTfyy != null  and eaTfyy != ''  ">EA_tfyy,</if>
+			<if test="eaFyfsrq != null  and eaFyfsrq != ''  ">EA_fyfsrq,</if>
+			<if test="eaClgrdh != null  and eaClgrdh != ''  ">EA_clgrdh,</if>
+			<if test="eaWybz != null  and eaWybz != ''  ">EA_wybz,</if>
+			<if test="eaBlsfxx != null  and eaBlsfxx != ''  ">EA_blsfxx,</if>
+			<if test="eaYhSm != null  and eaYhSm != ''  ">EA_yh_sm,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="eaId != null  and eaId != ''  ">#{eaId},</if>
+			<if test="eaAno != null  and eaAno != ''  ">#{eaAno},</if>
+			<if test="eaJzsh != null  and eaJzsh != ''  ">#{eaJzsh},</if>
+			<if test="eaRbid != null  and eaRbid != ''  ">#{eaRbid},</if>
+			<if test="eaXmh != null  and eaXmh != ''  ">#{eaXmh},</if>
+			<if test="eaDj != null  and eaDj != ''  ">#{eaDj},</if>
+			<if test="eaSl != null  and eaSl != ''  ">#{eaSl},</if>
+			<if test="eaJe != null  and eaJe != ''  ">#{eaJe},</if>
+			<if test="eaZxksh != null  and eaZxksh != ''  ">#{eaZxksh},</if>
+			<if test="eaZxysh != null  and eaZxysh != ''  ">#{eaZxysh},</if>
+			<if test="eaKdksh != null  and eaKdksh != ''  ">#{eaKdksh},</if>
+			<if test="eaYsh != null  and eaYsh != ''  ">#{eaYsh},</if>
+			<if test="eaRq != null  and eaRq != ''  ">#{eaRq},</if>
+			<if test="eaCzgh != null  and eaCzgh != ''  ">#{eaCzgh},</if>
+			<if test="eaGfbz != null  and eaGfbz != ''  ">#{eaGfbz},</if>
+			<if test="eaBmh != null  and eaBmh != ''  ">#{eaBmh},</if>
+			<if test="eaAutoSm != null  and eaAutoSm != ''  ">#{eaAutoSm},</if>
+			<if test="eaYeId != null  and eaYeId != ''  ">#{eaYeId},</if>
+			<if test="eaYbbz != null  and eaYbbz != ''  ">#{eaYbbz},</if>
+			<if test="eaYbzfbl != null  and eaYbzfbl != ''  ">#{eaYbzfbl},</if>
+			<if test="eaYbspbh != null  and eaYbspbh != ''  ">#{eaYbspbh},</if>
+			<if test="eaYbdj != null  and eaYbdj != ''  ">#{eaYbdj},</if>
+			<if test="eaXmgbh != null  and eaXmgbh != ''  ">#{eaXmgbh},</if>
+			<if test="eaBxbl != null  and eaBxbl != ''  ">#{eaBxbl},</if>
+			<if test="eaDbbz != null  and eaDbbz != ''  ">#{eaDbbz},</if>
+			<if test="eaZkbmh != null  and eaZkbmh != ''  ">#{eaZkbmh},</if>
+			<if test="eaZzysh != null  and eaZzysh != ''  ">#{eaZzysh},</if>
+			<if test="eaDyylz != null  and eaDyylz != ''  ">#{eaDyylz},</if>
+			<if test="eaCwh != null  and eaCwh != ''  ">#{eaCwh},</if>
+			<if test="eaYbcsbz != null  and eaYbcsbz != ''  ">#{eaYbcsbz},</if>
+			<if test="eaJcbz != null  and eaJcbz != ''  ">#{eaJcbz},</if>
+			<if test="eaXtid != null  and eaXtid != ''  ">#{eaXtid},</if>
+			<if test="eaYxtid != null  and eaYxtid != ''  ">#{eaYxtid},</if>
+			<if test="eaIcuYbmh != null  and eaIcuYbmh != ''  ">#{eaIcuYbmh},</if>
+			<if test="eaYbdm != null  and eaYbdm != ''  ">#{eaYbdm},</if>
+			<if test="eaHismac != null  and eaHismac != ''  ">#{eaHismac},</if>
+			<if test="eaYbspxz != null  and eaYbspxz != ''  ">#{eaYbspxz},</if>
+			<if test="eaTcsm != null  and eaTcsm != ''  ">#{eaTcsm},</if>
+			<if test="eaYhje != null  and eaYhje != ''  ">#{eaYhje},</if>
+			<if test="eaClxx != null  and eaClxx != ''  ">#{eaClxx},</if>
+			<if test="eaFbsm != null  and eaFbsm != ''  ">#{eaFbsm},</if>
+			<if test="eaZxbz != null  and eaZxbz != ''  ">#{eaZxbz},</if>
+			<if test="eaFdrfy != null  and eaFdrfy != ''  ">#{eaFdrfy},</if>
+			<if test="eaYbzfje != null  and eaYbzfje != ''  ">#{eaYbzfje},</if>
+			<if test="eaYbzlje != null  and eaYbzlje != ''  ">#{eaYbzlje},</if>
+			<if test="eaTxbfYbmh != null  and eaTxbfYbmh != ''  ">#{eaTxbfYbmh},</if>
+			<if test="eaTfyy != null  and eaTfyy != ''  ">#{eaTfyy},</if>
+			<if test="eaFyfsrq != null  and eaFyfsrq != ''  ">#{eaFyfsrq},</if>
+			<if test="eaClgrdh != null  and eaClgrdh != ''  ">#{eaClgrdh},</if>
+			<if test="eaWybz != null  and eaWybz != ''  ">#{eaWybz},</if>
+			<if test="eaBlsfxx != null  and eaBlsfxx != ''  ">#{eaBlsfxx},</if>
+			<if test="eaYhSm != null  and eaYhSm != ''  ">#{eaYhSm},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateHisZytf" parameterType="HisZytf">
+        update sys_his_zytf
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="eaId != null  and eaId != ''  ">EA_id = #{eaId},</if>
+            <if test="eaAno != null  and eaAno != ''  ">EA_ano = #{eaAno},</if>
+            <if test="eaJzsh != null  and eaJzsh != ''  ">EA_jzsh = #{eaJzsh},</if>
+            <if test="eaRbid != null  and eaRbid != ''  ">EA_rbid = #{eaRbid},</if>
+            <if test="eaXmh != null  and eaXmh != ''  ">EA_xmh = #{eaXmh},</if>
+            <if test="eaDj != null  and eaDj != ''  ">EA_dj = #{eaDj},</if>
+            <if test="eaSl != null  and eaSl != ''  ">EA_sl = #{eaSl},</if>
+            <if test="eaJe != null  and eaJe != ''  ">EA_je = #{eaJe},</if>
+            <if test="eaZxksh != null  and eaZxksh != ''  ">EA_zxksh = #{eaZxksh},</if>
+            <if test="eaZxysh != null  and eaZxysh != ''  ">EA_zxysh = #{eaZxysh},</if>
+            <if test="eaKdksh != null  and eaKdksh != ''  ">EA_kdksh = #{eaKdksh},</if>
+            <if test="eaYsh != null  and eaYsh != ''  ">EA_ysh = #{eaYsh},</if>
+            <if test="eaRq != null  and eaRq != ''  ">EA_rq = #{eaRq},</if>
+            <if test="eaCzgh != null  and eaCzgh != ''  ">EA_czgh = #{eaCzgh},</if>
+            <if test="eaGfbz != null  and eaGfbz != ''  ">EA_gfbz = #{eaGfbz},</if>
+            <if test="eaBmh != null  and eaBmh != ''  ">EA_bmh = #{eaBmh},</if>
+            <if test="eaAutoSm != null  and eaAutoSm != ''  ">EA_auto_sm = #{eaAutoSm},</if>
+            <if test="eaYeId != null  and eaYeId != ''  ">EA_ye_id = #{eaYeId},</if>
+            <if test="eaYbbz != null  and eaYbbz != ''  ">EA_ybbz = #{eaYbbz},</if>
+            <if test="eaYbzfbl != null  and eaYbzfbl != ''  ">EA_ybzfbl = #{eaYbzfbl},</if>
+            <if test="eaYbspbh != null  and eaYbspbh != ''  ">EA_ybspbh = #{eaYbspbh},</if>
+            <if test="eaYbdj != null  and eaYbdj != ''  ">EA_ybdj = #{eaYbdj},</if>
+            <if test="eaXmgbh != null  and eaXmgbh != ''  ">EA_xmgbh = #{eaXmgbh},</if>
+            <if test="eaBxbl != null  and eaBxbl != ''  ">EA_bxbl = #{eaBxbl},</if>
+            <if test="eaDbbz != null  and eaDbbz != ''  ">EA_dbbz = #{eaDbbz},</if>
+            <if test="eaZkbmh != null  and eaZkbmh != ''  ">EA_zkbmh = #{eaZkbmh},</if>
+            <if test="eaZzysh != null  and eaZzysh != ''  ">EA_zzysh = #{eaZzysh},</if>
+            <if test="eaDyylz != null  and eaDyylz != ''  ">EA_dyylz = #{eaDyylz},</if>
+            <if test="eaCwh != null  and eaCwh != ''  ">EA_cwh = #{eaCwh},</if>
+            <if test="eaYbcsbz != null  and eaYbcsbz != ''  ">EA_ybcsbz = #{eaYbcsbz},</if>
+            <if test="eaJcbz != null  and eaJcbz != ''  ">EA_jcbz = #{eaJcbz},</if>
+            <if test="eaXtid != null  and eaXtid != ''  ">EA_xtid = #{eaXtid},</if>
+            <if test="eaYxtid != null  and eaYxtid != ''  ">EA_yxtid = #{eaYxtid},</if>
+            <if test="eaIcuYbmh != null  and eaIcuYbmh != ''  ">EA_icu_ybmh = #{eaIcuYbmh},</if>
+            <if test="eaYbdm != null  and eaYbdm != ''  ">EA_ybdm = #{eaYbdm},</if>
+            <if test="eaHismac != null  and eaHismac != ''  ">EA_hismac = #{eaHismac},</if>
+            <if test="eaYbspxz != null  and eaYbspxz != ''  ">EA_ybspxz = #{eaYbspxz},</if>
+            <if test="eaTcsm != null  and eaTcsm != ''  ">EA_tcsm = #{eaTcsm},</if>
+            <if test="eaYhje != null  and eaYhje != ''  ">EA_yhje = #{eaYhje},</if>
+            <if test="eaClxx != null  and eaClxx != ''  ">EA_clxx = #{eaClxx},</if>
+            <if test="eaFbsm != null  and eaFbsm != ''  ">EA_fbsm = #{eaFbsm},</if>
+            <if test="eaZxbz != null  and eaZxbz != ''  ">EA_zxbz = #{eaZxbz},</if>
+            <if test="eaFdrfy != null  and eaFdrfy != ''  ">EA_fdrfy = #{eaFdrfy},</if>
+            <if test="eaYbzfje != null  and eaYbzfje != ''  ">EA_ybzfje = #{eaYbzfje},</if>
+            <if test="eaYbzlje != null  and eaYbzlje != ''  ">EA_ybzlje = #{eaYbzlje},</if>
+            <if test="eaTxbfYbmh != null  and eaTxbfYbmh != ''  ">ea_txbf_ybmh = #{eaTxbfYbmh},</if>
+            <if test="eaTfyy != null  and eaTfyy != ''  ">EA_tfyy = #{eaTfyy},</if>
+            <if test="eaFyfsrq != null  and eaFyfsrq != ''  ">EA_fyfsrq = #{eaFyfsrq},</if>
+            <if test="eaClgrdh != null  and eaClgrdh != ''  ">EA_clgrdh = #{eaClgrdh},</if>
+            <if test="eaWybz != null  and eaWybz != ''  ">EA_wybz = #{eaWybz},</if>
+            <if test="eaBlsfxx != null  and eaBlsfxx != ''  ">EA_blsfxx = #{eaBlsfxx},</if>
+            <if test="eaYhSm != null  and eaYhSm != ''  ">EA_yh_sm = #{eaYhSm},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteHisZytfById" parameterType="Integer">
+        delete from sys_his_zytf where id = #{id}
+    </delete>
+	
+    <delete id="deleteHisZytfByIds" parameterType="String">
+        delete from sys_his_zytf where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

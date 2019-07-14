@@ -1,0 +1,584 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+							<li>
+								：<input type="text" name="eaId"/>
+							</li>
+
+							<li>
+								病案号：<input type="text" name="eaAno"/>
+							</li>
+
+							<li>
+								日报id：<input type="text" name="eaRbid"/>
+							</li>
+
+							<li>
+								日期：<input type="text" name="eaRq"/>
+							</li>
+
+							<li>
+								项目编号：<input type="text" name="eaXmh"/>
+							</li>
+
+							<li>
+								部门号：<input type="text" name="eaBmh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaGfbz"/>
+							</li>
+
+							<li>
+								执行科室编号：<input type="text" name="eaZxksh"/>
+							</li>
+
+							<li>
+								执行科室医生：<input type="text" name="eaZxysh"/>
+							</li>
+
+							<li>
+								开单科室编号：<input type="text" name="eaKdksh"/>
+							</li>
+
+							<li>
+								医生编号：<input type="text" name="eaYsh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaJcdh"/>
+							</li>
+
+							<li>
+								单价：<input type="text" name="eaDj"/>
+							</li>
+
+							<li>
+								数量：<input type="text" name="eaSl"/>
+							</li>
+
+							<li>
+								金额：<input type="text" name="eaJe"/>
+							</li>
+
+							<li>
+								操作工号：<input type="text" name="eaCzgh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaJzsh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaLx"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYzfhId"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYeId"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaLsYpid"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYbbz"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYbzfbl"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYbspbh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYbdj"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaXmgbh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaBxbl"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaDbbz"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaZzysh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaDyylz"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaZkbmh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaCwh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaFhgh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaFhrq"/>
+							</li>
+
+							<li>
+								系统id：<input type="text" name="eaXtid"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYbcsbz"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaJcbz"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYjjcId"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaIcuYbmh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYbdm"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaHismac"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYbspxz"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaTcsm"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYhSm"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaClxx"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaFbsm"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaZxbz"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYbzfje"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYbzlje"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaTxbfYbmh"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaFyfsrq"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaWybz"/>
+							</li>
+
+							<li>
+								：<input type="text" name="cisId"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaBlsfxx"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYzlx"/>
+							</li>
+
+							<li>
+								：<input type="text" name="eaYhje"/>
+							</li>
+
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:hisZy:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:hisZy:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:hisZy:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:hisZy:export">
+						<i class="fa fa-download"></i> 导出
+				 </a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:hisZy:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:hisZy:remove')}]];
+        var prefix = ctx + "system/hisZy";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+                modalName: "住院收费数据",
+				search: false,
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'id', 
+					title : '住院收费主键',
+					visible: false
+				},
+				{
+					field : 'eaId', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaAno', 
+					title : '病案号',
+					sortable: true
+				},
+				{
+					field : 'eaRbid', 
+					title : '日报id',
+					sortable: true
+				},
+				{
+					field : 'eaRq', 
+					title : '日期',
+					sortable: true
+				},
+				{
+					field : 'eaXmh', 
+					title : '项目编号',
+					sortable: true
+				},
+				{
+					field : 'eaBmh', 
+					title : '部门号',
+					sortable: true
+				},
+				{
+					field : 'eaGfbz', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaZxksh', 
+					title : '执行科室编号',
+					sortable: true
+				},
+				{
+					field : 'eaZxysh', 
+					title : '执行科室医生',
+					sortable: true
+				},
+				{
+					field : 'eaKdksh', 
+					title : '开单科室编号',
+					sortable: true
+				},
+				{
+					field : 'eaYsh', 
+					title : '医生编号',
+					sortable: true
+				},
+				{
+					field : 'eaJcdh', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaDj', 
+					title : '单价',
+					sortable: true
+				},
+				{
+					field : 'eaSl', 
+					title : '数量',
+					sortable: true
+				},
+				{
+					field : 'eaJe', 
+					title : '金额',
+					sortable: true
+				},
+				{
+					field : 'eaCzgh', 
+					title : '操作工号',
+					sortable: true
+				},
+				{
+					field : 'eaJzsh', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaLx', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYzfhId', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYeId', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaLsYpid', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYbbz', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYbzfbl', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYbspbh', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYbdj', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaXmgbh', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaBxbl', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaDbbz', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaZzysh', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaDyylz', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaZkbmh', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaCwh', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaFhgh', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaFhrq', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaXtid', 
+					title : '系统id',
+					sortable: true
+				},
+				{
+					field : 'eaYbcsbz', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaJcbz', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYjjcId', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaIcuYbmh', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYbdm', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaHismac', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYbspxz', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaTcsm', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYhSm', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaClxx', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaFbsm', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaZxbz', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYbzfje', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYbzlje', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaTxbfYbmh', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaFyfsrq', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaWybz', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'cisId', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaBlsfxx', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYzlx', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'eaYhje', 
+					title : '',
+					sortable: true
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

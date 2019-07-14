@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.yjhsKsjx.mapper.YjhsKsjxMapper">
+    
+    <resultMap type="YjhsKsjx" id="YjhsKsjxResult">
+        <result property="id"    column="id"    />
+        <result property="rq"    column="rq"    />
+        <result property="deptid"    column="deptid"    />
+        <result property="deptname"    column="deptname"    />
+        <result property="jx"    column="jx"    />
+    </resultMap>
+	
+	<sql id="selectYjhsKsjxVo">
+        select id, rq, deptid, deptname, jx from sys_yjhs_ksjx
+    </sql>
+	
+    <select id="selectYjhsKsjxList" parameterType="YjhsKsjx" resultMap="YjhsKsjxResult">
+        <include refid="selectYjhsKsjxVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="rq != null  and rq != '' "> and rq = #{rq}</if>
+             <if test="deptid != null  and deptid != '' "> and deptid = #{deptid}</if>
+             <if test="deptname != null  and deptname != '' "> and deptname = #{deptname}</if>
+             <if test="jx != null "> and jx = #{jx}</if>
+         </where>
+    </select>
+    
+    <select id="selectYjhsKsjxById" parameterType="Integer" resultMap="YjhsKsjxResult">
+        <include refid="selectYjhsKsjxVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertYjhsKsjx" parameterType="YjhsKsjx">
+        insert into sys_yjhs_ksjx
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="rq != null  and rq != ''  ">rq,</if>
+			<if test="deptid != null  and deptid != ''  ">deptid,</if>
+			<if test="deptname != null  and deptname != ''  ">deptname,</if>
+			<if test="jx != null  ">jx,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="rq != null  and rq != ''  ">#{rq},</if>
+			<if test="deptid != null  and deptid != ''  ">#{deptid},</if>
+			<if test="deptname != null  and deptname != ''  ">#{deptname},</if>
+			<if test="jx != null  ">#{jx},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateYjhsKsjx" parameterType="YjhsKsjx">
+        update sys_yjhs_ksjx
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="rq != null  and rq != ''  ">rq = #{rq},</if>
+            <if test="deptid != null  and deptid != ''  ">deptid = #{deptid},</if>
+            <if test="deptname != null  and deptname != ''  ">deptname = #{deptname},</if>
+            <if test="jx != null  ">jx = #{jx},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteYjhsKsjxById" parameterType="Integer">
+        delete from sys_yjhs_ksjx where id = #{id}
+    </delete>
+	
+    <delete id="deleteYjhsKsjxByIds" parameterType="String">
+        delete from sys_yjhs_ksjx where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <select id="selectYjhsKsjxByRq" parameterType="String" resultType="int">
+    	SELECT count(rq) FROM sys_yjhs_ksjx  where rq=#{rq}
+    </select>
+    
+    <select id="selectYjjx" parameterType="YjhsKsjx" resultMap="YjhsKsjxResult">
+    	select y.rq,y.deptid,y.deptname,sum(y.xmjx) jx
+		from sys_yjhs_xmgzl y
+		GROUP BY y.rq,y.deptid
+    </select>
+    
+</mapper>

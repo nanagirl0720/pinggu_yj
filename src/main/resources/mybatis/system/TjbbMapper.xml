@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.tjbb.mapper.TjbbMapper">
+    
+    <resultMap type="Tjbb" id="TjbbResult">
+        <result property="id"    column="id"    />
+        <result property="rq"    column="rq"    />
+        <result property="zxksid"    column="zxksid"    />
+        <result property="xmid"    column="xmid"    />
+        <result property="xmmc"    column="xmmc"    />
+        <result property="xmgzl"    column="xmgzl"    />
+        <result property="zje"    column="zje"    />
+    </resultMap>
+	
+	<sql id="selectTjbbVo">
+        select id, rq, zxksid, xmid, xmmc, xmgzl, zje from sys_tjbb
+    </sql>
+	
+    <select id="selectTjbbList" parameterType="Tjbb" resultMap="TjbbResult">
+        <include refid="selectTjbbVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="rq != null  and rq != '' "> and rq = #{rq}</if>
+             <if test="zxksid != null  and zxksid != '' "> and zxksid = #{zxksid}</if>
+             <if test="xmid != null  and xmid != '' "> and xmid = #{xmid}</if>
+             <if test="xmmc != null  and xmmc != '' "> and xmmc = #{xmmc}</if>
+             <if test="xmgzl != null "> and xmgzl = #{xmgzl}</if>
+             <if test="zje != null "> and zje = #{zje}</if>
+         </where>
+    </select>
+    
+    <select id="selectTjbbById" parameterType="Integer" resultMap="TjbbResult">
+        <include refid="selectTjbbVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTjbb" parameterType="Tjbb">
+        insert into sys_tjbb
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="rq != null  and rq != ''  ">rq,</if>
+			<if test="zxksid != null  and zxksid != ''  ">zxksid,</if>
+			<if test="xmid != null  and xmid != ''  ">xmid,</if>
+			<if test="xmmc != null  and xmmc != ''  ">xmmc,</if>
+			<if test="xmgzl != null  ">xmgzl,</if>
+			<if test="zje != null  ">zje,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="rq != null  and rq != ''  ">#{rq},</if>
+			<if test="zxksid != null  and zxksid != ''  ">#{zxksid},</if>
+			<if test="xmid != null  and xmid != ''  ">#{xmid},</if>
+			<if test="xmmc != null  and xmmc != ''  ">#{xmmc},</if>
+			<if test="xmgzl != null  ">#{xmgzl},</if>
+			<if test="zje != null  ">#{zje},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateTjbb" parameterType="Tjbb">
+        update sys_tjbb
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="rq != null  and rq != ''  ">rq = #{rq},</if>
+            <if test="zxksid != null  and zxksid != ''  ">zxksid = #{zxksid},</if>
+            <if test="xmid != null  and xmid != ''  ">xmid = #{xmid},</if>
+            <if test="xmmc != null  and xmmc != ''  ">xmmc = #{xmmc},</if>
+            <if test="xmgzl != null  ">xmgzl = #{xmgzl},</if>
+            <if test="zje != null  ">zje = #{zje},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteTjbbById" parameterType="Integer">
+        delete from sys_tjbb where id = #{id}
+    </delete>
+	
+    <delete id="deleteTjbbByIds" parameterType="String">
+        delete from sys_tjbb where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

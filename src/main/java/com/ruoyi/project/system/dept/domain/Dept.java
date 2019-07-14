@@ -2,7 +2,9 @@ package com.ruoyi.project.system.dept.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.ruoyi.framework.web.domain.BaseEntity;
+import com.ruoyi.project.system.ks.domain.Ks;
 
 /**
  * 部门表 sys_dept
@@ -36,8 +38,19 @@ public class Dept extends BaseEntity
 
     /** 父部门名称 */
     private String parentName;
+    
+    private Ks ks;
 
-    public Long getDeptId()
+    
+    public Ks getKs() {
+		return ks;
+	}
+
+	public void setKs(Ks ks) {
+		this.ks = ks;
+	}
+
+	public Long getDeptId()
     {
         return deptId;
     }
@@ -131,6 +144,7 @@ public class Dept extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
+            .append("ks", getKs())
             .toString();
     }
 }

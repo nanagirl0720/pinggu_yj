@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content container-div">
+        <form class="form-horizontal m" id="form-yjxmKssb-add">
+			
+			<div class="form-group select-list">	
+				<div class="select-time">
+					<ul>
+						<li class="col-sm-8 select-time">
+							<label class="col-sm-3 control-label">上报日期：</label>
+							<input type='text' class="form-control form_datetime" name="rq" id="rq" placeholder="核算日期"/>
+						</li>
+						<li class="col-sm-8">
+							<label class="col-sm-3 control-label">项目名称：</label>
+							<select class="selectpicker show-tick" multiple  data-max-options="1" data-live-search="true" data-live-search-placeholder="搜索"  name="xmid" title="--请选择--"  data-style="btn-info" data-actions-box="true"> 
+										<option  th:each="list:${session.list}" th:value="${list.xmid}" th:text="${list.xmmc}"></option>
+									</select>
+						</li>
+						<li class="col-sm-8">
+							<label class="col-sm-3 control-label">项目数量：</label>
+							<input id="sl" name="sl" class="form-control" type="text">
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "system/yjxmKssb"
+		$("#form-yjxmKssb-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		 
+        $('#rq').datetimepicker({
+       	 format: 'yyyy-mm',
+            autoclose: true,
+            todayBtn: true,
+            startView: 'year',
+            minView:'year',
+            maxView:'decade',
+            language:  'zh-CN',
+            initialDate:new Date(),
+       });
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-yjxmKssb-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

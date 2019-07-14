@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.ks.mapper.KsMapper">
+    
+    <resultMap type="Ks" id="KsResult">
+        <result property="id"    column="id"    />
+        <result property="ksid"    column="ksid"    />
+        <result property="ksname"    column="ksname"    />
+        <result property="jxdyid"    column="jxdyid"    />
+    </resultMap>
+	
+	<sql id="selectKsVo">
+        select id, ksid, ksname, jxdyid from sys_ks
+    </sql>
+	
+    <select id="selectKsList" parameterType="Ks" resultMap="KsResult">
+        <include refid="selectKsVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="ksid != null  and ksid != '' "> and ksid = #{ksid}</if>
+             <if test="ksname != null  and ksname != '' "> and ksname = #{ksname}</if>
+             <if test="jxdyid != null "> and jxdyid = #{jxdyid}</if>
+         </where>
+    </select>
+    
+    <select id="selectKsById" parameterType="Integer" resultMap="KsResult">
+        <include refid="selectKsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertKs" parameterType="Ks">
+        insert into sys_ks
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="ksid != null  and ksid != ''  ">ksid,</if>
+			<if test="ksname != null  and ksname != ''  ">ksname,</if>
+			<if test="jxdyid != null  ">jxdyid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="ksid != null  and ksid != ''  ">#{ksid},</if>
+			<if test="ksname != null  and ksname != ''  ">#{ksname},</if>
+			<if test="jxdyid != null  ">#{jxdyid},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateKs" parameterType="Ks">
+        update sys_ks
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ksid != null  and ksid != ''  ">ksid = #{ksid},</if>
+            <if test="ksname != null  and ksname != ''  ">ksname = #{ksname},</if>
+            <if test="jxdyid != null  ">jxdyid = #{jxdyid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteKsById" parameterType="Integer">
+        delete from sys_ks where id = #{id}
+    </delete>
+	
+    <delete id="deleteKsByIds" parameterType="String">
+        delete from sys_ks where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
